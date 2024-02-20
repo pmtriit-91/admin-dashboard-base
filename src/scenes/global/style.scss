@@ -1,0 +1,41 @@
+.wrapper-sidebar {
+    .ps-sidebar-root {
+        border-right: none;
+        // background-color: #1F2A40 !important;
+    }
+
+    .ps-menu-button {
+        padding: 5px 35px 5px 20px !important;
+
+        .ps-menu-icon {
+            transition: transform 0.3s ease;
+            transform: rotate(0deg);
+        }
+
+        &:hover {
+            background-color: transparent !important;
+
+            .ps-menu-icon {
+                animation: tilt 0.5s ease;
+            }
+        }
+    }
+
+    @keyframes tilt {
+        25% {
+            transform: rotate(-12deg);
+        }
+
+        50% {
+            transform: rotate(12deg);
+        }
+
+        75% {
+            transform: rotate(-10deg);
+        }
+
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+}
