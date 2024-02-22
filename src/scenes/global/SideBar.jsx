@@ -43,6 +43,9 @@ function SidebarComponent() {
   return (
     <Box
       sx={{
+        "& .ps-sidebar-root": {
+          height: "100%",
+        },
         "& .ps-sidebar-container": {
           backgroundColor: colors.primary[400],
         },
