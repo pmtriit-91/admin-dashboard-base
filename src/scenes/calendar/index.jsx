@@ -54,6 +54,7 @@ const Calendar = () => {
     <Box
       m="20px"
       sx={{
+        "& .MuiBox-root": { marginBottom: "30px" },
         "& .MuiTypography-root.MuiTypography-h2": {
           margin: "0 0 5px 0",
         },
