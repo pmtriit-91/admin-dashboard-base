@@ -94,8 +94,12 @@ function SidebarComponent() {
                   alt="profile-user"
                   width="100px"
                   height="100px"
-                  src={`../../assets/user.png`}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
+                  src={`${process.env.PUBLIC_URL}/assets/user.jpeg`}
+                  style={{
+                    cursor: "pointer",
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                  }}
                 />
               </Box>
               <Box textAlign="center">
