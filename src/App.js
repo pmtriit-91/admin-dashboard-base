@@ -1,19 +1,20 @@
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { ColorModeContext, useMode } from './theme'
 import { Routes, Route } from 'react-router-dom'
+import { routes } from './routes/routes'
 import Topbar from './scenes/global/Topbar'
-import Dashboard from './scenes/dashboard'
 import SidebarComponent from './scenes/global/SideBar'
-import Team from './scenes/team'
-import Contacts from './scenes/contacts'
-import Invoices from './scenes/invoices'
-import Form from './scenes/form'
-import Calendar from './scenes/calendar';
-import FAQ from './scenes/faq'
-import Bar from './scenes/bar'
-import Pie from './scenes/pie'
-import Line from './scenes/line'
-import Geography from './scenes/geography'
+// import Dashboard from './scenes/dashboard'
+// import Team from './scenes/team'
+// import Contacts from './scenes/contacts'
+// import Invoices from './scenes/invoices'
+// import Form from './scenes/form'
+// import Calendar from './scenes/calendar';
+// import FAQ from './scenes/faq'
+// import Bar from './scenes/bar'
+// import Pie from './scenes/pie'
+// import Line from './scenes/line'
+// import Geography from './scenes/geography'
 
 function App() {
   const [theme, colorMode] = useMode()
@@ -27,7 +28,7 @@ function App() {
           <main className='content' style={{ overflowY: 'auto' }}>
             <Topbar />
             <Routes>
-              <Route path='/' element={<Dashboard />}></Route>
+              {/* <Route path='/' element={<Dashboard />}></Route>
               <Route path='/team' element={<Team />}></Route>
               <Route path='/contacts' element={<Contacts />}></Route>
               <Route path='/invoices' element={<Invoices />}></Route>
@@ -37,7 +38,10 @@ function App() {
               <Route path='/bar' element={<Bar />}></Route>
               <Route path='/pie' element={<Pie />}></Route>
               <Route path='/line' element={<Line />}></Route>
-              <Route path='/geography' element={<Geography />}></Route>
+              <Route path='/geography' element={<Geography />}></Route> */}
+              {routes.map((route, key) => (
+                <Route key={key} path={route.path} element={<route.element />} />
+              ))}
             </Routes>
           </main>
         </div>
