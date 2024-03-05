@@ -17,18 +17,18 @@ import SidebarComponent from './scenes/global/SideBar'
 // import Geography from './scenes/geography'
 
 function App() {
-  const [theme, colorMode] = useMode()
+    const [theme, colorMode] = useMode()
 
-  return (
-    <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <div className="app">
-          <SidebarComponent />
-          <main className='content' style={{ overflowY: 'auto' }}>
-            <Topbar />
-            <Routes>
-              {/* <Route path='/' element={<Dashboard />}></Route>
+    return (
+        <ColorModeContext.Provider value={colorMode}>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <div className='app'>
+                    <SidebarComponent />
+                    <main className='content' style={{ overflowY: 'auto' }}>
+                        <Topbar />
+                        <Routes>
+                            {/* <Route path='/' element={<Dashboard />}></Route>
               <Route path='/team' element={<Team />}></Route>
               <Route path='/contacts' element={<Contacts />}></Route>
               <Route path='/invoices' element={<Invoices />}></Route>
@@ -39,15 +39,19 @@ function App() {
               <Route path='/pie' element={<Pie />}></Route>
               <Route path='/line' element={<Line />}></Route>
               <Route path='/geography' element={<Geography />}></Route> */}
-              {routes.map((route, key) => (
-                <Route key={key} path={route.path} element={<route.element />} />
-              ))}
-            </Routes>
-          </main>
-        </div>
-      </ThemeProvider>
-    </ColorModeContext.Provider>
-  );
+                            {routes.map((route, key) => (
+                                <Route
+                                    key={key}
+                                    path={route.path}
+                                    element={<route.element />}
+                                />
+                            ))}
+                        </Routes>
+                    </main>
+                </div>
+            </ThemeProvider>
+        </ColorModeContext.Provider>
+    )
 }
 
-export default App;
+export default App
