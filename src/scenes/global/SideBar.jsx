@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar'
 import { Box, IconButton, Typography, useTheme } from '@mui/material'
 import { Link } from 'react-router-dom'
@@ -39,6 +39,14 @@ function SidebarComponent() {
     const colors = tokens(theme.palette.mode)
     const [isCollapsed, setIsCollapsed] = useState(false)
     const [selected, setSelected] = useState('Dashboard')
+
+    // Cập nhật trạng thái selected dựa trên đường dẫn hiện tại
+    useEffect(() => {
+        const path = location.pathname.split('/')[1]
+        // const capitalizedStr = path.charAt(0).toUpperCase() + path.slice(1)
+        // setSelected(path || 'Dashboard')
+        // console.log({ path })
+    }, [location.pathname])
 
     return (
         <Box

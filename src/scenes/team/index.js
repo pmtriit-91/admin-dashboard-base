@@ -135,7 +135,7 @@ const Team = () => {
                     pageSize={5}
                     rowsPerPageOptions={[5, 10, 20]}
                     pagination
-                    sortModel={[{ field: 'id', sort: 'asc' }]}
+                    // sortModel={[{ field: 'id', sort: 'asc' }]}
                 />
             </Box>
             <ModalEdit open={open} setOpen={setOpen} data={data} />

@@ -7,7 +7,10 @@
     "@emotion/styled": "^11.11.0",
     "@fullcalendar/core": "^6.1.10",
     "@fullcalendar/daygrid": "^6.1.10",
+    "@fullcalendar/interaction": "^6.1.11",
     "@fullcalendar/list": "^6.1.10",
+    "@fullcalendar/multimonth": "^6.1.11",
+    "@fullcalendar/react": "^6.1.11",
     "@fullcalendar/timegrid": "^6.1.10",
     "@mui/icons-material": "^5.15.10",
     "@mui/material": "^5.15.10",
@@ -21,6 +24,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "formik": "^2.4.5",
+    "fullcalendar": "^6.1.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-pro-sidebar": "^1.1.0",
@@ -35,12 +39,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
