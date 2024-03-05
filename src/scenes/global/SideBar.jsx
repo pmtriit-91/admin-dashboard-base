@@ -156,8 +156,8 @@ function SidebarComponent() {
                             Data
                         </Typography>
                         <Item
-                            title='Manage Team'
-                            to='/team'
+                            title='Manage Users'
+                            to='/users'
                             icon={<PeopleOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}

@@ -15,12 +15,12 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import Header from '../../components/Header'
 import ModalEdit from '../../components/ModalEdit'
 
-const Team = () => {
+const Users = () => {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
     const [data, setData] = useState(null)
 
-    const [open, setOpen] = React.useState(false)
+    const [open, setOpen] = useState(false)
     const handleOpen = (row) => {
         setOpen(true)
         setData(row)
@@ -99,7 +99,7 @@ const Team = () => {
                 },
             }}
         >
-            <Header title='TEAM' subtitle='Managin the Team Members' />
+            <Header title='USERS' subtitle='Managin the Users' />
             <Box
                 height='75vh'
                 m='40px 0 0 0'
@@ -143,4 +143,4 @@ const Team = () => {
     )
 }
 
-export default Team
+export default Users
