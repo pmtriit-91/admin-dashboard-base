@@ -89,7 +89,7 @@ function SidebarComponent() {
                                     variant='h3'
                                     color={colors.grey[100]}
                                 >
-                                    ADMINIS
+                                    BTASKEE
                                 </Typography>
                                 <IconButton
                                     onClick={() => setIsCollapsed(!isCollapsed)}

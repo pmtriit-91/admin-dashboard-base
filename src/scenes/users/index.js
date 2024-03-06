@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Box,
     Typography,
@@ -7,18 +7,30 @@ import {
     Button,
     TextField,
 } from '@mui/material'
-import { DataGrid } from '@mui/x-data-grid'
+import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { tokens } from '../../theme'
 import { mockDataTeam } from '../../data/mockData'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Header from '../../components/Header'
 import ModalEdit from '../../components/ModalEdit'
+import { useDispatch } from 'react-redux'
+import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined'
+import GroupAddIcon from '@mui/icons-material/GroupAdd'
 
 const Users = () => {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
     const [data, setData] = useState(null)
+    const [dataUsers, setDataUsers] = useState([])
+    const [pageSize, setPageSize] = useState(10)
+
+    // const dispatch = useDispatch()
+    useEffect(() => {
+        fetch('/api/listUser')
+            .then((res) => res.json())
+            .then((res) => setDataUsers(res.users))
+    }, [])
 
     const [open, setOpen] = useState(false)
     const handleOpen = (row) => {
@@ -90,6 +102,11 @@ const Users = () => {
         },
     ]
 
+    const handlePageSizeChange = (newPageSize) => {
+        console.log(`New page size: ${newPageSize}`)
+        setPageSize(newPageSize)
+    }
+
     return (
         <Box
             m='20px'
@@ -99,7 +116,26 @@ const Users = () => {
                 },
             }}
         >
-            <Header title='USERS' subtitle='Managin the Users' />
+            <Box
+                display='flex'
+                justifyContent='space-between'
+                alignItems='center'
+            >
+                <Header title='USERS' subtitle='Managin the Users' />
+                <Button
+                    size='small'
+                    sx={{
+                        backgroundColor: colors.blueAccent[700],
+                        color: colors.grey[100],
+                        fontSize: '14px',
+                        fontWeight: 'bold',
+                        padding: '10px 20px',
+                    }}
+                >
+                    <GroupAddIcon sx={{ mr: '10px' }} />
+                    ADD NEW USER
+                </Button>
+            </Box>
             <Box
                 height='75vh'
                 m='40px 0 0 0'
@@ -127,15 +163,24 @@ const Users = () => {
                     '& .MuiCheckbox-root': {
                         color: `${colors.greenAccent[200]} !important`,
                     },
+                    '& .MuiDataGrid-toolbarContainer .MuiButton-text': {
+                        color: `${colors.grey[100]} !important`,
+                    },
+                    '& .MuiDataGrid-footerContainer.css-n830jf-MuiDataGrid-footerContainer':
+                        {
+                            borderBottomLeftRadius: 4,
+                            borderBottomRightRadius: 4,
+                        },
                 }}
             >
                 <DataGrid
                     rows={mockDataTeam}
                     columns={columns}
-                    pageSize={5}
+                    pageSize={pageSize}
                     rowsPerPageOptions={[5, 10, 20]}
                     pagination
-                    // sortModel={[{ field: 'id', sort: 'asc' }]}
+                    components={{ Toolbar: GridToolbar }}
+                    onPageSizeChange={handlePageSizeChange}
                 />
             </Box>
             <ModalEdit open={open} setOpen={setOpen} data={data} />
