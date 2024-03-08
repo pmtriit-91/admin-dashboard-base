@@ -2,8 +2,8 @@ import { routerLinks } from './constant'
 
 import Dashboard from '../scenes/dashboard'
 import Users from '../scenes/users'
-import Contacts from '../scenes/contacts'
-import Invoices from '../scenes/invoices'
+import Employee from '../scenes/employee'
+import Workflow from '../scenes/workflow'
 import Form from '../scenes/form'
 import Calendar from '../scenes/calendar'
 import Faq from '../scenes/faq'
@@ -19,8 +19,8 @@ import BlankPage from '../scenes/blank'
 export const routes = [
     { name: 'dashboard', path: routerLinks['Dashboard'], element: Dashboard },
     { name: 'users', path: routerLinks['Users'], element: Users },
-    { name: 'contacts', path: routerLinks['Contacts'], element: Contacts },
-    { name: 'invoices', path: routerLinks['Invoices'], element: Invoices },
+    { name: 'employee', path: routerLinks['Employee'], element: Employee },
+    { name: 'workflow', path: routerLinks['Workflow'], element: Workflow },
     { name: 'form', path: routerLinks['Form'], element: Form },
     { name: 'calendar', path: routerLinks['Calendar'], element: Calendar },
     { name: 'faq', path: routerLinks['Faq'], element: Faq },

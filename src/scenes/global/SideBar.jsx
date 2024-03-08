@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar'
+import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar'
 import { Box, IconButton, Typography, useTheme } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { tokens } from '../../theme'
@@ -15,38 +15,30 @@ import PieChartOutlineOutlinedIcon from '@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from '@mui/icons-material/TimelineOutlined'
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined'
 import MapOutlinedIcon from '@mui/icons-material/MapOutlined'
+import WorkOutlineOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined'
+import AccessAlarmOutlinedIcon from '@mui/icons-material/AccessAlarmOutlined'
 import './style.scss'
 
-const Item = ({ title, to, icon, selected, setSelected }) => {
-    const theme = useTheme()
-    const colors = tokens(theme.palette.mode)
-    return (
-        <Link to={to} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <MenuItem
-                active={selected === title}
-                style={{ color: colors.grey[100] }}
-                onClick={() => setSelected(title)}
-                icon={icon}
-            >
-                <Typography>{title}</Typography>
-            </MenuItem>
-        </Link>
-    )
-}
-
 function SidebarComponent() {
-    const theme = useTheme()
-    const colors = tokens(theme.palette.mode)
     const [isCollapsed, setIsCollapsed] = useState(false)
     const [selected, setSelected] = useState('Dashboard')
+    const theme = useTheme()
+    const colors = tokens(theme.palette.mode)
 
-    // Cập nhật trạng thái selected dựa trên đường dẫn hiện tại
-    useEffect(() => {
-        const path = location.pathname.split('/')[1]
-        // const capitalizedStr = path.charAt(0).toUpperCase() + path.slice(1)
-        // setSelected(path || 'Dashboard')
-        // console.log({ path })
-    }, [location.pathname])
+    const Item = ({ title, to, icon, selected, setSelected }) => {
+        return (
+            <Link to={to} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <MenuItem
+                    active={selected === title}
+                    style={{ color: colors.grey[100] }}
+                    onClick={() => setSelected(title)}
+                    icon={icon}
+                >
+                    <Typography>{title}</Typography>
+                </MenuItem>
+            </Link>
+        )
+    }
 
     return (
         <Box
@@ -64,12 +56,14 @@ function SidebarComponent() {
                 '& .ps-menu-button.ps-active': {
                     color: '#6870fa !important',
                 },
+                '& .ps-submenu-content': {
+                    bgcolor: colors.primary[400],
+                },
             }}
             className='wrapper-sidebar'
         >
             <Sidebar collapsed={isCollapsed}>
                 <Menu>
-                    {/* LOGO AND MENU ICON */}
                     <MenuItem
                         onClick={() => setIsCollapsed(!isCollapsed)}
                         icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
@@ -138,8 +132,8 @@ function SidebarComponent() {
                         </Box>
                     )}
 
-                    {/* MENU ITEMS */}
-                    <Box paddingLeft={isCollapsed ? undefined : '10%'}>
+                    {/* <Box paddingLeft={isCollapsed ? undefined : '10%'}> */}
+                    <Box>
                         <Item
                             title='Dashboard'
                             to='/'
@@ -163,8 +157,8 @@ function SidebarComponent() {
                             setSelected={setSelected}
                         />
                         <Item
-                            title='Contacts Information'
-                            to='/contacts'
+                            title='Manage Employee'
+                            to='/employee'
                             icon={<ContactsOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
@@ -177,13 +171,39 @@ function SidebarComponent() {
                         >
                             Pages
                         </Typography>
-                        <Item
-                            title='Invoices Balances'
-                            to='/invoices'
+
+                        <SubMenu
+                            label='Workflow management'
                             icon={<ReceiptOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
+                        >
+                            <Item
+                                title='Work'
+                                to='/workflow-management'
+                                icon={<WorkOutlineOutlinedIcon />}
+                                selected={selected}
+                                setSelected={setSelected}
+                            />
+                            <Item
+                                title='Assign work'
+                                to='/assign-work'
+                                icon={<ContactsOutlinedIcon />}
+                                selected={selected}
+                                setSelected={setSelected}
+                            />
+                            <SubMenu
+                                label='menu lv3'
+                                icon={<AccessAlarmOutlinedIcon />}
+                            >
+                                <Item
+                                    title='submenu lv3'
+                                    to='/submenu'
+                                    icon={<ContactsOutlinedIcon />}
+                                    selected={selected}
+                                    setSelected={setSelected}
+                                />
+                            </SubMenu>
+                        </SubMenu>
+
                         <Item
                             title='Profile Form'
                             to='/form'

@@ -6,6 +6,7 @@ import {
     IconButton,
     Button,
     TextField,
+    Popover,
 } from '@mui/material'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { tokens } from '../../theme'
@@ -13,10 +14,10 @@ import { mockDataTeam } from '../../data/mockData'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Header from '../../components/Header'
-import ModalEdit from '../../components/ModalEdit'
 import { useDispatch } from 'react-redux'
-import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined'
 import GroupAddIcon from '@mui/icons-material/GroupAdd'
+import ModalEditUser from '../../components/modal/modalUser/ModalEdit'
+import ModalAddUser from '../../components/modal/modalUser/ModalAdd'
 
 const Users = () => {
     const theme = useTheme()
@@ -24,23 +25,41 @@ const Users = () => {
     const [data, setData] = useState(null)
     const [dataUsers, setDataUsers] = useState([])
     const [pageSize, setPageSize] = useState(10)
+    const [openEdit, setOpenEdit] = useState(false)
+    const [openAdd, setOpenAdd] = useState(false)
+    const [openDelete, setOpenDelete] = useState(false)
+    const [idRowDelete, setIdRowDelete] = useState(null)
+    const [anchorEl, setAnchorEl] = useState(null)
 
     // const dispatch = useDispatch()
-    useEffect(() => {
-        fetch('/api/listUser')
-            .then((res) => res.json())
-            .then((res) => setDataUsers(res.users))
-    }, [])
+    // useEffect(() => {
+    //     fetch('/api/listUser')
+    //         .then((res) => res.json())
+    //         .then((res) => setDataUsers(res.users))
+    // }, [])
 
-    const [open, setOpen] = useState(false)
-    const handleOpen = (row) => {
-        setOpen(true)
+    const handleOpenEdit = (row) => {
+        setOpenEdit(true)
         setData(row)
     }
 
-    // const handleDelete = (id) => {
-    //     console.log(`Delete clicked for id: ${id}`)
-    // }
+    const handleDelete = (id, event) => {
+        // console.log(`Delete clicked for id: ${id}`)
+        setOpenDelete(true)
+        setIdRowDelete(id)
+        setAnchorEl(event.currentTarget)
+    }
+
+    const handleCloseDelete = () => {
+        setOpenDelete(false)
+        setAnchorEl(null)
+    }
+
+    const handleConfirmDelete = () => {
+        console.log('delete')
+        setOpenDelete(false)
+        setAnchorEl(null)
+    }
 
     const columns = [
         {
@@ -85,22 +104,89 @@ const Users = () => {
                 >
                     <IconButton
                         // onClick={() => handleEdit(row.id)}
-                        onClick={() => handleOpen(row)}
+                        onClick={() => handleOpenEdit(row)}
                         color='secondary'
                         aria-label='edit'
                     >
                         <EditIcon />
                     </IconButton>
                     <IconButton
-                        // onClick={() => handleDelete(row.id)}
+                        onClick={(event) => handleDelete(row.id, event)}
                         aria-label='delete'
                     >
                         <DeleteIcon />
                     </IconButton>
+                    <Popover
+                        id={idRowDelete}
+                        open={openDelete}
+                        anchorEl={anchorEl}
+                        onClose={handleCloseDelete}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left',
+                        }}
+                        sx={{
+                            '& .css-3bmhjh-MuiPaper-root-MuiPopover-paper': {
+                                boxShadow:
+                                    'rgba(149, 152, 165, 0.2) 2px 2px 2px',
+                            },
+                            '& .css-jx6v87-MuiPaper-root-MuiPopover-paper': {
+                                border: '1px solid',
+                                boxShadow: 'none',
+                            },
+                            '& .css-l44o5j-MuiButtonBase-root-MuiButton-root:hover':
+                                {
+                                    bgcolor: '#ffffff4d',
+                                },
+                        }}
+                    >
+                        <Box p={2}>
+                            <Typography>
+                                Are you sure you want to delete this item?
+                            </Typography>
+                            <Box
+                                marginTop='10px'
+                                sx={{
+                                    display: 'flex',
+                                    justifyContent: 'flex-end',
+                                }}
+                            >
+                                <Button
+                                    size='small'
+                                    variant='contained'
+                                    color='error'
+                                    onClick={handleConfirmDelete}
+                                    sx={{
+                                        marginRight: '10px',
+                                        fontWeight: 600,
+                                    }}
+                                >
+                                    OK
+                                </Button>
+                                <Button
+                                    size='small'
+                                    onClick={handleCloseDelete}
+                                    variant='outlined'
+                                    sx={{
+                                        bgcolor:
+                                            theme.palette.mode === 'dark'
+                                                ? colors.grey[100]
+                                                : '',
+                                    }}
+                                >
+                                    Cancel
+                                </Button>
+                            </Box>
+                        </Box>
+                    </Popover>
                 </Box>
             ),
         },
     ]
+
+    const handleOpenModalAddUser = () => {
+        setOpenAdd(true)
+    }
 
     const handlePageSizeChange = (newPageSize) => {
         console.log(`New page size: ${newPageSize}`)
@@ -123,7 +209,6 @@ const Users = () => {
             >
                 <Header title='USERS' subtitle='Managin the Users' />
                 <Button
-                    size='small'
                     sx={{
                         backgroundColor: colors.blueAccent[700],
                         color: colors.grey[100],
@@ -131,6 +216,7 @@ const Users = () => {
                         fontWeight: 'bold',
                         padding: '10px 20px',
                     }}
+                    onClick={handleOpenModalAddUser}
                 >
                     <GroupAddIcon sx={{ mr: '10px' }} />
                     ADD NEW USER
@@ -183,7 +269,8 @@ const Users = () => {
                     onPageSizeChange={handlePageSizeChange}
                 />
             </Box>
-            <ModalEdit open={open} setOpen={setOpen} data={data} />
+            <ModalEditUser open={openEdit} setOpen={setOpenEdit} data={data} />
+            <ModalAddUser open={openAdd} setOpen={setOpenAdd} />
         </Box>
     )
 }

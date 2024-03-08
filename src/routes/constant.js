@@ -1,8 +1,8 @@
 export const routerLinks = {
     Dashboard: '/',
     Users: '/users',
-    Contacts: '/contacts',
-    Invoices: '/invoices',
+    Employee: '/employee',
+    Workflow: '/workflow-management',
     Form: '/form',
     Calendar: '/calendar',
     Faq: '/faq',
