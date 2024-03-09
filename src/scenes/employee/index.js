@@ -255,7 +255,7 @@ const Employee = () => {
                     onClick={handleOpenModalAddMember}
                 >
                     <GroupAddIcon sx={{ mr: '10px' }} />
-                    ADD NEW MEMBER
+                    THÊM NHÂN VIÊN
                 </Button>
             </Box>
             <Box
