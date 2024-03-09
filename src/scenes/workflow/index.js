@@ -25,6 +25,11 @@ import ModalEdit from '../../components/modal/modalWorkflow/ModalEdit'
 import PortraitIcon from '@mui/icons-material/Portrait'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 
+import TextField from '@mui/material/TextField'
+import Autocomplete from '@mui/material/Autocomplete'
+import parse from 'autosuggest-highlight/parse'
+import match from 'autosuggest-highlight/match'
+
 const Workflow = () => {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
@@ -117,14 +122,21 @@ const Workflow = () => {
     ]
 
     const PopoverBoxAsignEmployee = () => {
+        // const columns = [
+        //     { field: 'name', headerName: 'Tên nhân viên', flex: 1 },
+        // ]
         return (
             <Popover
                 open={openBoxAsignEmployee}
                 anchorEl={anchorEl}
                 onClose={handleCloseBoxAsignEmployee}
                 anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
+                    vertical: 'center',
+                    horizontal: 'center',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
                 }}
                 sx={{
                     '& .css-3bmhjh-MuiPaper-root-MuiPopover-paper': {
@@ -137,43 +149,132 @@ const Workflow = () => {
                     '& .css-l44o5j-MuiButtonBase-root-MuiButton-root:hover': {
                         bgcolor: '#ffffff4d',
                     },
+                    '& .MuiBox-root': { bgcolor: colors.primary[400] },
                 }}
             >
-                <Box p='20px' sx={{ maxHeight: '300px', overflowY: 'auto' }}>
-                    <Table>
-                        <TableHead>
-                            <TableCell
-                                sx={{
-                                    color: colors.greenAccent[400],
-                                    fontWeight: 600,
-                                    paddingTop: 0,
-                                }}
-                            >
-                                Danh sách nhân viên
-                            </TableCell>
-                        </TableHead>
-                        <TableBody>
-                            {mockDataContacts.map((employee) => {
-                                console.log(employee.name)
-                                return (
-                                    <TableRow
-                                        key={employee.id}
-                                        sx={{
-                                            '&:last-child td, &:last-child th':
-                                                { border: 0 },
-                                            cursor: 'pointer',
-                                        }}
-                                    >
-                                        <TableCell component='th' scope='row'>
-                                            {employee.name}
-                                        </TableCell>
-                                    </TableRow>
-                                )
-                            })}
-                        </TableBody>
-                    </Table>
+                <Box p='20px'>
+                    <Autocomplete
+                        // id='highlights-demo'
+                        sx={{ width: '300px' }}
+                        options={mockDataContacts}
+                        getOptionLabel={(option) => option.name}
+                        onFocus={() => console.log('onFocus')}
+                        onBlur={() => console.log('onBlur')}
+                        renderInput={(params) => {
+                            return (
+                                <TextField
+                                    {...params}
+                                    label='Search Employee'
+                                    margin='normal'
+                                    variant='outlined'
+                                    sx={{
+                                        '& .css-75gcxd-MuiFormLabel-root-MuiInputLabel-root.Mui-focused':
+                                            {
+                                                color: '#ffffff4d',
+                                            },
+                                    }}
+                                />
+                            )
+                        }}
+                        renderOption={(props, option, { inputValue }) => {
+                            const matches = match(option.name, inputValue, {
+                                insideWords: true,
+                            })
+                            const parts = parse(option.name, matches)
+
+                            return (
+                                <li {...props}>
+                                    <div>
+                                        {parts.map((part, index) => (
+                                            <span
+                                                key={index}
+                                                style={{
+                                                    fontWeight: part.highlight
+                                                        ? 700
+                                                        : 400,
+                                                    color: part.highlight
+                                                        ? colors
+                                                              .greenAccent[500]
+                                                        : colors.grey[100],
+                                                }}
+                                            >
+                                                {part.text}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </li>
+                            )
+                        }}
+                    />
                 </Box>
             </Popover>
+
+            // <Popover
+            //     open={openBoxAsignEmployee}
+            //     anchorEl={anchorEl}
+            //     onClose={handleCloseBoxAsignEmployee}
+            //     anchorOrigin={{
+            //         vertical: 'center',
+            //         horizontal: 'center',
+            //     }}
+            //     transformOrigin={{
+            //         vertical: 'top',
+            //         horizontal: 'right',
+            //     }}
+            //     sx={{
+            //         '& .css-3bmhjh-MuiPaper-root-MuiPopover-paper': {
+            //             boxShadow: 'rgba(149, 152, 165, 0.2) 2px 2px 2px',
+            //         },
+            //         '& .css-jx6v87-MuiPaper-root-MuiPopover-paper': {
+            //             border: '1px solid',
+            //             boxShadow: 'none',
+            //         },
+            //         '& .css-l44o5j-MuiButtonBase-root-MuiButton-root:hover': {
+            //             bgcolor: '#ffffff4d',
+            //         },
+            //     }}
+            // >
+            //     <Box p='20px' sx={{ maxHeight: '300px', overflowY: 'auto' }}>
+            //         <DataGrid
+            //             columns={columns}
+            //             rows={mockDataContacts}
+            //             pageSize={5}
+            //             autoHeight
+            //         />
+            //         <Table>
+            //             <TableHead>
+            //                 <TableCell
+            //                     sx={{
+            //                         color: colors.greenAccent[400],
+            //                         fontWeight: 600,
+            //                         paddingTop: 0,
+            //                     }}
+            //                 >
+            //                     Danh sách nhân viên
+            //                 </TableCell>
+            //             </TableHead>
+            //             <TableBody>
+            //                 {mockDataContacts.map((employee) => {
+            //                     console.log(employee.name)
+            //                     return (
+            //                         <TableRow
+            //                             key={employee.id}
+            //                             sx={{
+            //                                 '&:last-child td, &:last-child th':
+            //                                     { border: 0 },
+            //                                 cursor: 'pointer',
+            //                             }}
+            //                         >
+            //                             <TableCell component='th' scope='row'>
+            //                                 {employee.name}
+            //                             </TableCell>
+            //                         </TableRow>
+            //                     )
+            //                 })}
+            //             </TableBody>
+            //         </Table>
+            //     </Box>
+            // </Popover>
         )
     }
 
