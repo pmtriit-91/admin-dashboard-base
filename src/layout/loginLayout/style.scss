@@ -1,0 +1,27 @@
+@import '../../assets/styles/variable.scss';
+
+.login-layout {
+
+    &.ant-layout,
+    &.full-layout.ant-layout {
+        bottom: 0;
+        left: 0;
+        position: absolute !important;
+        right: 0;
+        top: 0;
+        background: transparent url("../../assets/images/bg-login.jpeg") no-repeat center center/cover;
+        background-attachment: fixed !important;
+        height: 100%;
+        width: 100%;
+        display: inline-table;
+
+        .ant-layout-sider>.ant-layout-sider-children {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .ant-layout-content {
+            background: $bg_login;
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import {
     Box,
     Typography,
@@ -12,6 +12,11 @@ import {
     TableHead,
     TableBody,
     TableRow,
+    Modal,
+    Select,
+    MenuItem,
+    FormControl,
+    InputLabel,
 } from '@mui/material'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { tokens } from '../../theme'
@@ -29,6 +34,7 @@ import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
 import parse from 'autosuggest-highlight/parse'
 import match from 'autosuggest-highlight/match'
+import { ClickAwayListener } from '@mui/base/ClickAwayListener'
 
 const Workflow = () => {
     const theme = useTheme()
@@ -122,9 +128,31 @@ const Workflow = () => {
     ]
 
     const PopoverBoxAsignEmployee = () => {
+        // const inputRef = useRef(null)
+        const [name, setName] = useState('')
         // const columns = [
         //     { field: 'name', headerName: 'Tên nhân viên', flex: 1 },
         // ]
+        // useEffect(() => {
+        //     const timeout = setTimeout(() => {
+        //         if (openBoxAsignEmployee && inputRef.current) {
+        //             inputRef.current.focus()
+        //         }
+        //     }, 0)
+
+        //     return () => clearTimeout(timeout)
+        // }, [openBoxAsignEmployee])
+
+        const handleChangeEmployee = (e) => {
+            setName(e.target.value)
+        }
+
+        const handleSubmit = (e) => {
+            e.preventDefault()
+            console.log(name)
+            setOpenBoxAsignEmployee(false)
+        }
+
         return (
             <Popover
                 open={openBoxAsignEmployee}
@@ -152,62 +180,175 @@ const Workflow = () => {
                     '& .MuiBox-root': { bgcolor: colors.primary[400] },
                 }}
             >
-                <Box p='20px'>
-                    <Autocomplete
-                        // id='highlights-demo'
-                        sx={{ width: '300px' }}
-                        options={mockDataContacts}
-                        getOptionLabel={(option) => option.name}
-                        onFocus={() => console.log('onFocus')}
-                        onBlur={() => console.log('onBlur')}
-                        renderInput={(params) => {
-                            return (
-                                <TextField
-                                    {...params}
-                                    label='Search Employee'
-                                    margin='normal'
-                                    variant='outlined'
+                <Box
+                    p='20px'
+                    sx={{
+                        '& .css-y3n1jv-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused .MuiOutlinedInput-notchedOutline':
+                            {
+                                borderColor: colors.grey[100],
+                                borderWidth: '1px',
+                            },
+                        '& .css-75gcxd-MuiFormLabel-root-MuiInputLabel-root.Mui-focused':
+                            {
+                                color: colors.grey[100],
+                            },
+                        '& .css-1sw3p5j-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root.Mui-focused .MuiOutlinedInput-notchedOutline':
+                            {
+                                borderColor: colors.grey[100],
+                                borderWidth: '1px',
+                            },
+                        '& .css-kc02vp-MuiPaper-root-MuiPopover-paper-MuiMenu-paper':
+                            {
+                                maxHeight: 200,
+                            },
+                    }}
+                >
+                    <Typography
+                        variant='h5'
+                        marginBottom='10px'
+                        color={colors.greenAccent[500]}
+                    >
+                        Danh sách nhân viên
+                    </Typography>
+                    <form onSubmit={handleSubmit}>
+                        <FormControl sx={{ m: 1, width: 220 }} size='medium'>
+                            <InputLabel id='demo-select-small-label'>
+                                Tên nhân viên
+                            </InputLabel>
+                            <Select
+                                labelId='demo-select-small-label'
+                                id='demo-select-small'
+                                value={name}
+                                label='Tên nhân viên'
+                                onChange={handleChangeEmployee}
+                                MenuProps={{
+                                    PaperProps: { sx: { maxHeight: 300 } },
+                                }}
+                            >
+                                {mockDataContacts.map((elm) => {
+                                    return (
+                                        <MenuItem key={elm.id} value={elm.name}>
+                                            {elm.name}
+                                        </MenuItem>
+                                    )
+                                })}
+                            </Select>
+                            <Box
+                                marginTop='10px'
+                                display='flex'
+                                justifyContent='flex-end'
+                            >
+                                <Button
+                                    variant='contained'
+                                    type='submit'
+                                    size='small'
+                                    color='success'
                                     sx={{
-                                        '& .css-75gcxd-MuiFormLabel-root-MuiInputLabel-root.Mui-focused':
-                                            {
-                                                color: '#ffffff4d',
-                                            },
+                                        fontWeight: 600,
+                                        color: 'white',
                                     }}
-                                />
-                            )
-                        }}
-                        renderOption={(props, option, { inputValue }) => {
-                            const matches = match(option.name, inputValue, {
-                                insideWords: true,
-                            })
-                            const parts = parse(option.name, matches)
-
-                            return (
-                                <li {...props}>
-                                    <div>
-                                        {parts.map((part, index) => (
-                                            <span
-                                                key={index}
-                                                style={{
-                                                    fontWeight: part.highlight
-                                                        ? 700
-                                                        : 400,
-                                                    color: part.highlight
-                                                        ? colors
-                                                              .greenAccent[500]
-                                                        : colors.grey[100],
-                                                }}
-                                            >
-                                                {part.text}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </li>
-                            )
-                        }}
-                    />
+                                    // onClick={handleSubmit}
+                                >
+                                    Chọn
+                                </Button>
+                                <Button
+                                    variant='text'
+                                    sx={{
+                                        color: colors.grey[100],
+                                    }}
+                                    onClick={handleCloseBoxAsignEmployee}
+                                >
+                                    Huỷ
+                                </Button>
+                            </Box>
+                        </FormControl>
+                    </form>
                 </Box>
             </Popover>
+            // <Popover
+            //     open={openBoxAsignEmployee}
+            //     anchorEl={anchorEl}
+            //     onClose={handleCloseBoxAsignEmployee}
+            //     anchorOrigin={{
+            //         vertical: 'center',
+            //         horizontal: 'center',
+            //     }}
+            //     transformOrigin={{
+            //         vertical: 'top',
+            //         horizontal: 'right',
+            //     }}
+            //     sx={{
+            //         '& .css-3bmhjh-MuiPaper-root-MuiPopover-paper': {
+            //             boxShadow: 'rgba(149, 152, 165, 0.2) 2px 2px 2px',
+            //         },
+            //         '& .css-jx6v87-MuiPaper-root-MuiPopover-paper': {
+            //             border: '1px solid',
+            //             boxShadow: 'none',
+            //         },
+            //         '& .css-l44o5j-MuiButtonBase-root-MuiButton-root:hover': {
+            //             bgcolor: '#ffffff4d',
+            //         },
+            //         '& .MuiBox-root': { bgcolor: colors.primary[400] },
+            //     }}
+            // >
+            //     <Box p='20px'>
+            //         <Typography variant='h5' color={colors.greenAccent[500]}>
+            //             Danh sách nhân viên
+            //         </Typography>
+            //         <Autocomplete
+            //             // id='highlights-demo'
+            //             sx={{ width: '300px' }}
+            //             options={mockDataContacts}
+            //             getOptionLabel={(option) => option.name}
+            //             renderInput={(params) => {
+            //                 return (
+            //                     <TextField
+            //                         {...params}
+            //                         label='Tìm kiếm nhân viên'
+            //                         margin='normal'
+            //                         variant='outlined'
+            //                         sx={{
+            //                             '& .css-75gcxd-MuiFormLabel-root-MuiInputLabel-root.Mui-focused':
+            //                                 {
+            //                                     color: '#ffffff4d',
+            //                                 },
+            //                         }}
+            //                         inputRef={inputRef}
+            //                     />
+            //                 )
+            //             }}
+            //             renderOption={(props, option, { inputValue }) => {
+            //                 const matches = match(option.name, inputValue, {
+            //                     insideWords: true,
+            //                 })
+            //                 const parts = parse(option.name, matches)
+
+            //                 return (
+            //                     <li {...props}>
+            //                         <div>
+            //                             {parts.map((part, index) => (
+            //                                 <span
+            //                                     key={index}
+            //                                     style={{
+            //                                         fontWeight: part.highlight
+            //                                             ? 700
+            //                                             : 400,
+            //                                         color: part.highlight
+            //                                             ? colors
+            //                                                   .greenAccent[500]
+            //                                             : colors.grey[100],
+            //                                     }}
+            //                                 >
+            //                                     {part.text}
+            //                                 </span>
+            //                             ))}
+            //                         </div>
+            //                     </li>
+            //                 )
+            //             }}
+            //         />
+            //     </Box>
+            // </Popover>
 
             // <Popover
             //     open={openBoxAsignEmployee}

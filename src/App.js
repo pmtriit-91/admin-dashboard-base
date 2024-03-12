@@ -1,24 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, Fragment } from 'react'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { ColorModeContext, useMode } from './theme'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate, Router } from 'react-router-dom'
 import { routes } from './routes/routes'
 import Topbar from './scenes/global/Topbar'
 import SidebarComponent from './scenes/global/SideBar'
 import { setupServer } from './fakeApis'
 import { useDispatch } from 'react-redux'
 import { fetchUsers } from './scenes/users/usersSlice'
-// import Dashboard from './scenes/dashboard'
-// import Team from './scenes/team'
-// import Contacts from './scenes/contacts'
-// import Invoices from './scenes/invoices'
-// import Form from './scenes/form'
-// import Calendar from './scenes/calendar';
-// import FAQ from './scenes/faq'
-// import Bar from './scenes/bar'
-// import Pie from './scenes/pie'
-// import Line from './scenes/line'
-// import Geography from './scenes/geography'
+import Login from './scenes/login'
+import { routerLinks } from './routes/constant'
+import LoginLayout from './layout/loginLayout/LoginLayout'
+import { publicRoutes, privateRoutes } from './routes/routes'
+import AdminLayout from './layout/AdminLayout'
 
 if (process.env.NODE_ENV === 'development') {
     setupServer()
@@ -26,50 +20,17 @@ if (process.env.NODE_ENV === 'development') {
 
 function App() {
     const [theme, colorMode] = useMode()
-
-    // const dispatch = useDispatch()
-
-    // useEffect(() => {
-    //     // fetch('/api/addUser', {
-    //     //     method: 'POST',
-    //     //     body: JSON.stringify({
-    //     //         id: 1,
-    //     //         name: 'Jon Snow',
-    //     //         email: 'jonsnow@gmail.com',
-    //     //         age: 35,
-    //     //         phone: '(665)121-5454',
-    //     //         access: 'admin',
-    //     //     }),
-    //     // }).then((res) =>
-    //     //     fetch('/api/listUser')
-    //     //         .then((res) => res.json())
-    //     //         .then((res) => console.log({ res })),
-    //     // )
-    //     fetch('/api/listUser')
-    //         .then((res) => res.json())
-    //         .then((res) => console.log({ res }))
-    // }, [])
+    const tokenStorage = ''
 
     return (
         <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <div className='app'>
+                {/* <div className='app'>
                     <SidebarComponent />
                     <main className='content' style={{ overflowY: 'auto' }}>
                         <Topbar />
                         <Routes>
-                            {/* <Route path='/' element={<Dashboard />}></Route>
-              <Route path='/team' element={<Team />}></Route>
-              <Route path='/contacts' element={<Contacts />}></Route>
-              <Route path='/invoices' element={<Invoices />}></Route>
-              <Route path='/form' element={<Form />}></Route>
-              <Route path='/calendar' element={<Calendar />}></Route>
-              <Route path='/faq' element={<FAQ />}></Route>
-              <Route path='/bar' element={<Bar />}></Route>
-              <Route path='/pie' element={<Pie />}></Route>
-              <Route path='/line' element={<Line />}></Route>
-              <Route path='/geography' element={<Geography />}></Route> */}
                             {routes.map((route, key) => (
                                 <Route
                                     key={key}
@@ -79,6 +40,62 @@ function App() {
                             ))}
                         </Routes>
                     </main>
+                </div> */}
+                <div className='app'>
+                    <Routes>
+                        {publicRoutes.map((route, index) => {
+                            let Layout = AdminLayout
+
+                            if (route.layout) {
+                                Layout = route.layout
+                            } else if (route.layout === null) {
+                                Layout = Fragment
+                            }
+
+                            const Page = route.component
+
+                            return (
+                                <Route
+                                    key={index}
+                                    path={route.path}
+                                    element={
+                                        tokenStorage &&
+                                        tokenStorage.length > 0 ? (
+                                            <Layout>
+                                                <Page />
+                                            </Layout>
+                                        ) : (
+                                            <Navigate to={'/login'} />
+                                        )
+                                    }
+                                />
+                            )
+                        })}
+                        {privateRoutes.map((route, index) => {
+                            let Layout = LoginLayout
+
+                            if (route.layout) {
+                                console.log('layout: ', route.component)
+                                Layout = route.layout
+                            } else if (route.layout === null) {
+                                Layout = Fragment
+                            }
+
+                            const Page = route.component
+
+                            return (
+                                <Route
+                                    key={index}
+                                    path={route.path}
+                                    element={
+                                        <Layout>
+                                            <Page />
+                                        </Layout>
+                                    }
+                                />
+                            )
+                        })}
+                    </Routes>
                 </div>
             </ThemeProvider>
         </ColorModeContext.Provider>

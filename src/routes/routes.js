@@ -12,24 +12,27 @@ import Pie from '../scenes/pie'
 import Line from '../scenes/line'
 import Geography from '../scenes/geography'
 import BlankPage from '../scenes/blank'
+import AdminLayout from '../layout/AdminLayout'
+import LoginLayout from '../layout/loginLayout/LoginLayout'
+import Login from '../scenes/login'
 
 // import MobileDashboard from "./Mobile/MobileDashboard";
 // import MobileSettings from "./Mobile/MobileSettings";
 
-export const routes = [
-    { name: 'dashboard', path: routerLinks['Dashboard'], element: Dashboard },
-    { name: 'users', path: routerLinks['Users'], element: Users },
-    { name: 'employee', path: routerLinks['Employee'], element: Employee },
-    { name: 'workflow', path: routerLinks['Workflow'], element: Workflow },
-    { name: 'form', path: routerLinks['Form'], element: Form },
-    { name: 'calendar', path: routerLinks['Calendar'], element: Calendar },
-    { name: 'faq', path: routerLinks['Faq'], element: Faq },
-    { name: 'bar', path: routerLinks['Bar'], element: Bar },
-    { name: 'pie', path: routerLinks['Pie'], element: Pie },
-    { name: 'line', path: routerLinks['Line'], element: Line },
-    { name: 'geography', path: routerLinks['Geography'], element: Geography },
-    { name: 'blank', path: '*', element: BlankPage },
-]
+// export const routes = [
+//     { name: 'dashboard', path: routerLinks['Dashboard'], element: Dashboard },
+//     { name: 'users', path: routerLinks['Users'], element: Users },
+//     { name: 'employee', path: routerLinks['Employee'], element: Employee },
+//     { name: 'workflow', path: routerLinks['Workflow'], element: Workflow },
+//     { name: 'form', path: routerLinks['Form'], element: Form },
+//     { name: 'calendar', path: routerLinks['Calendar'], element: Calendar },
+//     { name: 'faq', path: routerLinks['Faq'], element: Faq },
+//     { name: 'bar', path: routerLinks['Bar'], element: Bar },
+//     { name: 'pie', path: routerLinks['Pie'], element: Pie },
+//     { name: 'line', path: routerLinks['Line'], element: Line },
+//     { name: 'geography', path: routerLinks['Geography'], element: Geography },
+//     { name: 'blank', path: '*', element: BlankPage },
+// ]
 
 // export const routesMobile = [
 //   {
@@ -44,3 +47,38 @@ export const routes = [
 //   },
 //   { name: "blank", path: "*", element: Blank },
 // ];
+
+//Public routes
+const publicRoutes = [
+    {
+        path: routerLinks.Dashboard,
+        component: Dashboard,
+        layout: AdminLayout,
+    },
+    {
+        path: routerLinks.Users,
+        component: Users,
+        layout: AdminLayout,
+    },
+    {
+        path: '*',
+        component: BlankPage,
+        layout: AdminLayout,
+    },
+
+    // { path: routesConfig.teethwhite, component: TeethWhite, layout: CategoryLayout },
+]
+
+//Private routes
+const privateRoutes = [
+    {
+        path: routerLinks.Login,
+        component: Login,
+        layout: LoginLayout,
+    },
+    // { path: routesConfig.adminSchedule, component: AdminSchedule, layout: AdminLayout },
+    // { path: routesConfig.adminPatientList, component: PatientList, layout: AdminLayout },
+    // { path: routesConfig.adminNews, component: AdminNews, layout: AdminLayout },
+]
+
+export { publicRoutes, privateRoutes }

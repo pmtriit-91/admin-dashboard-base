@@ -10,6 +10,7 @@ export const routerLinks = {
     Pie: '/pie',
     Line: '/line',
     Geography: '/geography',
+    Login: '/login',
 }
 export const m_routerLinks = {
     M_Dashboard: '/',
