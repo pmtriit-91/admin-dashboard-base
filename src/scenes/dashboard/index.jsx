@@ -80,8 +80,8 @@ function Dashboard() {
                 alignItems='center'
             >
                 <Header
-                    title='DASHBOARD'
-                    subtitle='Welcome to your dashboard'
+                    title='TRANG CHỦ'
+                    subtitle='Chào mừng đến với trang quản lý Btaskee'
                 />
 
                 <Box>
@@ -95,7 +95,7 @@ function Dashboard() {
                         }}
                     >
                         <DownloadOutlinedIcon sx={{ mr: '10px' }} />
-                        Download Reports
+                        TẢI BÁO CÁO
                     </Button>
                 </Box>
             </Box>
@@ -147,7 +147,7 @@ function Dashboard() {
                                 fontWeight='600'
                                 color={colors.grey[100]}
                             >
-                                Revenue Generated
+                                Thống Kê Doanh Thu
                             </Typography>
                             <Typography
                                 variant='h3'
@@ -193,7 +193,7 @@ function Dashboard() {
                             fontWeight='600'
                             color={colors.grey[100]}
                         >
-                            Recent Transactions
+                            Đơn Đặt Hàng
                         </Typography>
                     </Box>
                     {mockTransactions.map((transaction, i) => {

@@ -17,6 +17,7 @@ import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined'
 import MapOutlinedIcon from '@mui/icons-material/MapOutlined'
 import WorkOutlineOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined'
 import AccessAlarmOutlinedIcon from '@mui/icons-material/AccessAlarmOutlined'
+import DiscountIcon from '@mui/icons-material/Discount'
 import './style.scss'
 
 function SidebarComponent() {
@@ -103,13 +104,13 @@ function SidebarComponent() {
                             >
                                 <img
                                     alt='profile-user'
-                                    width='100px'
-                                    height='100px'
                                     src={`${process.env.PUBLIC_URL}/assets/user.jpeg`}
                                     style={{
                                         cursor: 'pointer',
                                         borderRadius: '50%',
                                         objectFit: 'cover',
+                                        width: 100,
+                                        height: 100,
                                     }}
                                 />
                             </Box>
@@ -135,7 +136,7 @@ function SidebarComponent() {
                     {/* <Box paddingLeft={isCollapsed ? undefined : '10%'}> */}
                     <Box>
                         <Item
-                            title='Dashboard'
+                            title='Trang chủ'
                             to='/'
                             icon={<HomeOutlinedIcon />}
                             selected={selected}
@@ -150,14 +151,14 @@ function SidebarComponent() {
                             Data
                         </Typography>
                         <Item
-                            title='Manage Users'
+                            title='Quản lý người sử dụng'
                             to='/users'
                             icon={<PeopleOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
                         />
                         <Item
-                            title='Manage Employee'
+                            title='Quản lý nhân viên'
                             to='/employee'
                             icon={<ContactsOutlinedIcon />}
                             selected={selected}
@@ -173,11 +174,11 @@ function SidebarComponent() {
                         </Typography>
 
                         <SubMenu
-                            label='Workflow management'
+                            label='Quản lý công việc'
                             icon={<ReceiptOutlinedIcon />}
                         >
                             <Item
-                                title='Work'
+                                title='Công việc'
                                 to='/workflow-management'
                                 icon={<WorkOutlineOutlinedIcon />}
                                 selected={selected}
@@ -203,6 +204,14 @@ function SidebarComponent() {
                                 />
                             </SubMenu>
                         </SubMenu>
+
+                        <Item
+                            title='Quản lý ưu đãi'
+                            to='/discount'
+                            icon={<DiscountIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
 
                         <Item
                             title='Profile Form'

@@ -15,6 +15,7 @@ import BlankPage from '../scenes/blank'
 import AdminLayout from '../layout/AdminLayout'
 import LoginLayout from '../layout/loginLayout/LoginLayout'
 import Login from '../scenes/login'
+import Discount from '../scenes/discount'
 
 // import MobileDashboard from "./Mobile/MobileDashboard";
 // import MobileSettings from "./Mobile/MobileSettings";
@@ -58,6 +59,56 @@ const publicRoutes = [
     {
         path: routerLinks.Users,
         component: Users,
+        layout: AdminLayout,
+    },
+    {
+        path: routerLinks.Employee,
+        component: Employee,
+        layout: AdminLayout,
+    },
+    {
+        path: routerLinks.Workflow,
+        component: Workflow,
+        layout: AdminLayout,
+    },
+    {
+        path: routerLinks.Discount,
+        component: Discount,
+        layout: AdminLayout,
+    },
+    {
+        path: routerLinks.Form,
+        component: Form,
+        layout: AdminLayout,
+    },
+    {
+        path: routerLinks.Calendar,
+        component: Calendar,
+        layout: AdminLayout,
+    },
+    {
+        path: routerLinks.Faq,
+        component: Faq,
+        layout: AdminLayout,
+    },
+    {
+        path: routerLinks.Bar,
+        component: Bar,
+        layout: AdminLayout,
+    },
+    {
+        path: routerLinks.Pie,
+        component: Pie,
+        layout: AdminLayout,
+    },
+    {
+        path: routerLinks.Line,
+        component: Line,
+        layout: AdminLayout,
+    },
+    {
+        path: routerLinks.Geography,
+        component: Geography,
         layout: AdminLayout,
     },
     {

@@ -15,7 +15,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd'
 import ModalAdd from '../../components/modal/modalMembers/ModalAdd'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
-import ModalEdit from '../../components/modal/modalMembers/ModalEdit'
+import ModalEdit from '../../components/modal/ModalEdit'
 
 const Employee = () => {
     const theme = useTheme()
@@ -81,6 +81,7 @@ const Employee = () => {
                                 padding='5px'
                                 width='50%'
                                 bgcolor='green'
+                                color='#e0e0e0'
                             >
                                 {row.status}
                             </Box>
@@ -92,6 +93,7 @@ const Employee = () => {
                                 padding='5px'
                                 width='50%'
                                 bgcolor='red'
+                                color='#e0e0e0'
                             >
                                 {row.status}
                             </Box>
@@ -240,10 +242,7 @@ const Employee = () => {
                 justifyContent='space-between'
                 alignItems='center'
             >
-                <Header
-                    title='EMPLOYEE'
-                    subtitle='List of Employee for Future Reference'
-                />
+                <Header title='NHÂN VIÊN' subtitle='Trang quản lý nhân viên' />
                 <Button
                     sx={{
                         backgroundColor: colors.blueAccent[700],
@@ -310,6 +309,7 @@ const Employee = () => {
                 open={openEdit}
                 setOpen={setOpenEdit}
                 data={data}
+                modalOf={'employee'}
             ></ModalEdit>
         </Box>
     )

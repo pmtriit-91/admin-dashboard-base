@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'development') {
 
 function App() {
     const [theme, colorMode] = useMode()
-    const tokenStorage = ''
+    const tokenStorage = '22'
 
     return (
         <ColorModeContext.Provider value={colorMode}>

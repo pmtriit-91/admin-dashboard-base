@@ -328,6 +328,30 @@ export const mockTransactions = [
     },
 ]
 
+export const mockDiscountData = [
+    {
+        id: 1,
+        name: 'Giảm giá mùa hè',
+        createDate: '2024-02-28',
+        expiryDate: '2024-08-31',
+        status: 'Đã kích hoạt',
+    },
+    {
+        id: 2,
+        name: 'Ưu đãi sinh nhật',
+        createDate: '2024-01-15',
+        expiryDate: '2024-12-31',
+        status: 'Chưa kích hoạt',
+    },
+    {
+        id: 3,
+        name: 'Khuyến mãi cuối năm',
+        createDate: '2023-11-20',
+        expiryDate: '2023-12-31',
+        status: 'Đã huỷ',
+    },
+]
+
 export const mockBarData = [
     {
         country: 'AD',

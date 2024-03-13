@@ -16,7 +16,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import Header from '../../components/Header'
 import { useDispatch } from 'react-redux'
 import GroupAddIcon from '@mui/icons-material/GroupAdd'
-import ModalEditUser from '../../components/modal/modalUser/ModalEdit'
+import ModalEditUser from '../../components/modal/ModalEdit'
 import ModalAddUser from '../../components/modal/modalUser/ModalAdd'
 
 const Users = () => {
@@ -207,7 +207,10 @@ const Users = () => {
                 justifyContent='space-between'
                 alignItems='center'
             >
-                <Header title='USERS' subtitle='Managin the Users' />
+                <Header
+                    title='NGƯỜI SỬ DỤNG'
+                    subtitle='Trang quản lý người sử dụng'
+                />
                 <Button
                     sx={{
                         backgroundColor: colors.blueAccent[700],
@@ -219,7 +222,7 @@ const Users = () => {
                     onClick={handleOpenModalAddUser}
                 >
                     <GroupAddIcon sx={{ mr: '10px' }} />
-                    ADD NEW USER
+                    THÊM MỚI NGƯỜI SỬ DỤNG
                 </Button>
             </Box>
             <Box
@@ -269,7 +272,12 @@ const Users = () => {
                     onPageSizeChange={handlePageSizeChange}
                 />
             </Box>
-            <ModalEditUser open={openEdit} setOpen={setOpenEdit} data={data} />
+            <ModalEditUser
+                open={openEdit}
+                setOpen={setOpenEdit}
+                data={data}
+                modalOf={'users'}
+            />
             <ModalAddUser open={openAdd} setOpen={setOpenAdd} />
         </Box>
     )

@@ -10,6 +10,15 @@ body {
     font-family: 'Manrope', sans-serif !important;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    /* Màu nền */
+    -webkit-text-fill-color: #333 !important;
+    /* Màu chữ */
+}
+
 /** LOGIN */
 .row-form {
     display: flex;
@@ -48,13 +57,13 @@ body {
         background-color: $primary-color;
         border-color: $primary-color;
         height: 40px;
-        font-weight: 300;
+        font-weight: 600;
         font-size: 14px !important;
 
         &:hover,
         &:focus,
         &:hover {
-            background-color: $primary-light;
+            background-color: $primary-light !important;
             border-color: $primary-light;
         }
     }
