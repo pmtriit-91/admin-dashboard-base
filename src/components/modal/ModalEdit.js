@@ -227,11 +227,16 @@ export default function ModalEdit({ open, setOpen, data = {}, modalOf = '' }) {
                         component='h2'
                         color={colors.grey[500]}
                     >
-                        EDIT USER
+                        {modalOf === 'users'
+                            ? 'CHỈNH SỬA THÔNG TIN NGƯỜI SỬ DỤNG'
+                            : modalOf === 'discount'
+                              ? 'CHỈNH SỬA ƯU ĐÃI'
+                              : modalOf === 'employee'
+                                ? 'CHỈNH SỬA THÔNG TIN NHÂN VIÊN'
+                                : 'CHỈNH SỬA'}
                     </Typography>
                     <Box id='modal-modal-description' sx={{ mt: 2 }}>
-                        Duis mollis, est non commodo luctus, nisi erat porttitor
-                        ligula.
+                        Mô tả thêm ...
                         <Box
                             component='form'
                             sx={{
@@ -255,7 +260,7 @@ export default function ModalEdit({ open, setOpen, data = {}, modalOf = '' }) {
                                     marginRight: '10px',
                                 }}
                             >
-                                Save
+                                Lưu
                             </Button>
                             <Button
                                 onClick={handleClose}
@@ -267,7 +272,7 @@ export default function ModalEdit({ open, setOpen, data = {}, modalOf = '' }) {
                                             : '',
                                 }}
                             >
-                                Cancel
+                                Huỷ
                             </Button>
                         </Box>
                     </Box>

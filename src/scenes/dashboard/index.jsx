@@ -245,7 +245,7 @@ function Dashboard() {
                         fontWeight='600'
                         color={colors.grey[100]}
                     >
-                        Campaign
+                        Doanh thu theo ngày
                     </Typography>
                     <Box
                         display='flex'
@@ -279,7 +279,7 @@ function Dashboard() {
                         color={colors.grey[100]}
                         sx={{ p: '30px 30px 0 30px' }}
                     >
-                        Sales Quantity
+                        Người lao động
                     </Typography>
                     <Box height='250px' mt='-20px'>
                         <BarChart isDashboard={true} />

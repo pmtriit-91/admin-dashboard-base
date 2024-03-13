@@ -4,18 +4,123 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import Modal from '@mui/material/Modal'
 import { useTheme } from '@mui/material'
-import { tokens } from '../../../theme'
+import { tokens } from '../../theme'
 import TextField from '@mui/material/TextField'
 
-export default function ModalAdd({ open, setOpen }) {
+export default function ModalAdd({ open, setOpen, modalOf = '' }) {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
     const handleClose = () => setOpen(false)
 
+    //users
     const [name, setName] = useState('')
     const [age, setAge] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
+
+    //discount
+    const [createDate, setCreateDate] = useState('')
+    const [expiryDate, setExpiryDate] = useState('')
+
+    const renderInputs = () => {
+        switch (modalOf) {
+            case 'discount':
+                return (
+                    <>
+                        <TextField
+                            id='outlined-basic'
+                            label='Tên ưu đãi'
+                            variant='outlined'
+                            color='secondary'
+                            fullWidth
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <TextField
+                            id='outlined-basic'
+                            label='Ngày tạo'
+                            variant='outlined'
+                            color='secondary'
+                            value={createDate}
+                            onChange={(e) => setCreateDate(e.target.value)}
+                        />
+                        <TextField
+                            id='outlined-basic'
+                            label='Hạn sử dụng'
+                            variant='outlined'
+                            color='secondary'
+                            fullWidth
+                            value={expiryDate}
+                            onChange={(e) => setExpiryDate(e.target.value)}
+                        />
+                    </>
+                )
+            case 'users':
+                return (
+                    <>
+                        <TextField
+                            id='outlined-basic'
+                            label='Name'
+                            variant='outlined'
+                            color='secondary'
+                            fullWidth
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <TextField
+                            id='outlined-basic'
+                            label='Age'
+                            variant='outlined'
+                            color='secondary'
+                            value={age}
+                            onChange={(e) => setAge(e.target.value)}
+                        />
+                        <TextField
+                            id='outlined-basic'
+                            label='Phone'
+                            variant='outlined'
+                            color='secondary'
+                            fullWidth
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                        />
+                        <TextField
+                            id='outlined-basic'
+                            label='Email'
+                            variant='outlined'
+                            color='secondary'
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </>
+                )
+            case 'employee':
+                return (
+                    <>
+                        <TextField
+                            id='outlined-basic'
+                            label='Tên nhân viên'
+                            variant='outlined'
+                            color='secondary'
+                            fullWidth
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <TextField
+                            id='outlined-basic'
+                            label='Phone'
+                            variant='outlined'
+                            color='secondary'
+                            fullWidth
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                        />
+                    </>
+                )
+            default:
+                return null
+        }
+    }
 
     //handle save
     const handleSave = () => {
@@ -60,8 +165,15 @@ export default function ModalAdd({ open, setOpen }) {
                         component='h2'
                         color={colors.grey[500]}
                     >
-                        ADD USER
+                        {modalOf === 'users'
+                            ? 'THÊM NGƯỜI SỬ DỤNG'
+                            : modalOf === 'discount'
+                              ? 'THÊM ƯU ĐÃI'
+                              : modalOf === 'employee'
+                                ? 'THÊM NHÂN VIÊN'
+                                : 'THÊM MỚI'}
                     </Typography>
+
                     <Box id='modal-modal-description' sx={{ mt: 2 }}>
                         <Box
                             component='form'
@@ -75,40 +187,7 @@ export default function ModalAdd({ open, setOpen }) {
                             noValidate
                             autoComplete='off'
                         >
-                            <TextField
-                                id='outlined-basic'
-                                label='Name'
-                                variant='outlined'
-                                color='secondary'
-                                fullWidth
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                            <TextField
-                                id='outlined-basic'
-                                label='Age'
-                                variant='outlined'
-                                color='secondary'
-                                value={age}
-                                onChange={(e) => setAge(e.target.value)}
-                            />
-                            <TextField
-                                id='outlined-basic'
-                                label='Phone'
-                                variant='outlined'
-                                color='secondary'
-                                fullWidth
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
-                            />
-                            <TextField
-                                id='outlined-basic'
-                                label='Email'
-                                variant='outlined'
-                                color='secondary'
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
+                            {renderInputs()}
                         </Box>
                         <Box mt={2} display='flex' justifyContent='flex-end'>
                             <Button
@@ -119,7 +198,7 @@ export default function ModalAdd({ open, setOpen }) {
                                     marginRight: '10px',
                                 }}
                             >
-                                Save
+                                Lưu
                             </Button>
                             <Button
                                 onClick={handleClose}
@@ -131,7 +210,7 @@ export default function ModalAdd({ open, setOpen }) {
                                             : '',
                                 }}
                             >
-                                Cancel
+                                Huỷ
                             </Button>
                         </Box>
                     </Box>

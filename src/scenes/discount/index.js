@@ -17,6 +17,7 @@ import Header from '../../components/Header'
 import { useDispatch } from 'react-redux'
 import GroupAddIcon from '@mui/icons-material/GroupAdd'
 import ModalEdit from '../../components/modal/ModalEdit'
+import ModalAdd from '../../components/modal/ModalAdd'
 
 const Discount = () => {
     const theme = useTheme()
@@ -29,13 +30,6 @@ const Discount = () => {
     const [openDelete, setOpenDelete] = useState(false)
     const [idRowDelete, setIdRowDelete] = useState(null)
     const [anchorEl, setAnchorEl] = useState(null)
-
-    // const dispatch = useDispatch()
-    // useEffect(() => {
-    //     fetch('/api/listUser')
-    //         .then((res) => res.json())
-    //         .then((res) => setDataUsers(res.users))
-    // }, [])
 
     const handleOpenEdit = (row) => {
         setOpenEdit(true)
@@ -271,6 +265,11 @@ const Discount = () => {
                 open={openEdit}
                 setOpen={setOpenEdit}
                 data={data}
+                modalOf={'discount'}
+            />
+            <ModalAdd
+                open={openAdd}
+                setOpen={setOpenAdd}
                 modalOf={'discount'}
             />
         </Box>

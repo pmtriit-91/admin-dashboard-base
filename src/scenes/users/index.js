@@ -17,7 +17,7 @@ import Header from '../../components/Header'
 import { useDispatch } from 'react-redux'
 import GroupAddIcon from '@mui/icons-material/GroupAdd'
 import ModalEditUser from '../../components/modal/ModalEdit'
-import ModalAddUser from '../../components/modal/modalUser/ModalAdd'
+import ModalAdd from '../../components/modal/ModalAdd'
 
 const Users = () => {
     const theme = useTheme()
@@ -278,7 +278,7 @@ const Users = () => {
                 data={data}
                 modalOf={'users'}
             />
-            <ModalAddUser open={openAdd} setOpen={setOpenAdd} />
+            <ModalAdd open={openAdd} setOpen={setOpenAdd} modalOf={'users'} />
         </Box>
     )
 }
