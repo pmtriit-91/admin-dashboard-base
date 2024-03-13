@@ -457,10 +457,7 @@ const Workflow = () => {
                 justifyContent='space-between'
                 alignItems='center'
             >
-                <Header
-                    title='WORKFLOW MANAGEMENT'
-                    subtitle='Work management page'
-                />
+                <Header title='CÔNG VIỆC' subtitle='Trang quản lý công việc' />
                 <Button
                     sx={{
                         backgroundColor: colors.blueAccent[700],

@@ -27,6 +27,9 @@ export default function ModalEdit({ open, setOpen, data = {}, modalOf = '' }) {
     const [address, setAddress] = useState(data?.address || '')
     const [city, setCity] = useState(data?.city || '')
 
+    //CompanyManagement
+    const [service, setService] = useState(data?.service || '')
+
     useEffect(() => {
         //set state users
         setName(data?.name || '')
@@ -185,6 +188,53 @@ export default function ModalEdit({ open, setOpen, data = {}, modalOf = '' }) {
                         />
                     </>
                 )
+            case 'companyManagement':
+                return (
+                    <>
+                        <TextField
+                            id='outlined-basic'
+                            label='Tên công ty'
+                            variant='outlined'
+                            color='secondary'
+                            fullWidth
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <TextField
+                            id='outlined-basic'
+                            label='Dịch vụ'
+                            variant='outlined'
+                            color='secondary'
+                            value={service}
+                            onChange={(e) => setService(e.target.value)}
+                        />
+                        <TextField
+                            id='outlined-basic'
+                            label='Số điện thoại'
+                            variant='outlined'
+                            color='secondary'
+                            fullWidth
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                        />
+                        <TextField
+                            id='outlined-basic'
+                            label='Địa chỉ'
+                            variant='outlined'
+                            color='secondary'
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                        />
+                        <TextField
+                            id='outlined-basic'
+                            label='Ngày tạo'
+                            variant='outlined'
+                            color='secondary'
+                            value={createDate}
+                            onChange={(e) => setCreateDate(e.target.value)}
+                        />
+                    </>
+                )
             default:
                 return null
         }
@@ -233,7 +283,9 @@ export default function ModalEdit({ open, setOpen, data = {}, modalOf = '' }) {
                               ? 'CHỈNH SỬA ƯU ĐÃI'
                               : modalOf === 'employee'
                                 ? 'CHỈNH SỬA THÔNG TIN NHÂN VIÊN'
-                                : 'CHỈNH SỬA'}
+                                : modalOf === 'companyManagement'
+                                  ? 'CHỈNH SỬA THÔNG TIN CÔNG TY'
+                                  : 'CHỈNH SỬA'}
                     </Typography>
                     <Box id='modal-modal-description' sx={{ mt: 2 }}>
                         Mô tả thêm ...

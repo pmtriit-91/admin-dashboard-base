@@ -16,6 +16,7 @@ import AdminLayout from '../layout/AdminLayout'
 import LoginLayout from '../layout/loginLayout/LoginLayout'
 import Login from '../scenes/login'
 import Discount from '../scenes/discount'
+import CompanyManagement from '../scenes/companyManagement'
 
 // import MobileDashboard from "./Mobile/MobileDashboard";
 // import MobileSettings from "./Mobile/MobileSettings";
@@ -54,6 +55,11 @@ const publicRoutes = [
     {
         path: routerLinks.Dashboard,
         component: Dashboard,
+        layout: AdminLayout,
+    },
+    {
+        path: routerLinks.CompanyManagement,
+        component: CompanyManagement,
         layout: AdminLayout,
     },
     {

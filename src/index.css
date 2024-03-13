@@ -36,3 +36,7 @@ body,
 ::-webkit-scrollbar-track:hover {
   background: #555;
 }
+
+p {
+  margin-bottom: 0 !important;
+}

@@ -352,6 +352,49 @@ export const mockDiscountData = [
     },
 ]
 
+export const mockCompanyData = [
+    {
+        id: 1,
+        name: 'ABC Cleaning Services',
+        service: 'Dọn nhà',
+        phone: '0123456789',
+        address: '123 Đường ABC, Quận XYZ, Thành phố HCM',
+        createDate: '2024-02-28',
+    },
+    {
+        id: 2,
+        name: 'XYZ Cooking Service',
+        service: 'Nấu ăn',
+        phone: '0987654321',
+        address: '456 Đường XYZ, Quận ABC, Thành phố Hà Nội',
+        createDate: '2024-02-28',
+    },
+    {
+        id: 3,
+        name: 'Senior Care Center',
+        service: 'Chăm người già',
+        phone: '0365478912',
+        address: '789 Đường DEF, Quận MNO, Thành phố Đà Nẵng',
+        createDate: '2024-02-27',
+    },
+    {
+        id: 4,
+        name: 'Sunshine Housekeeping',
+        service: 'Dọn nhà',
+        phone: '0321654987',
+        address: '321 Đường GHI, Quận PQR, Thành phố Hải Phòng',
+        createDate: '2024-02-26',
+    },
+    {
+        id: 5,
+        name: 'Healthy Meals Delivery',
+        service: 'Giao đồ ăn lành mạnh',
+        phone: '0153792648',
+        address: '987 Đường JKL, Quận STU, Thành phố Cần Thơ',
+        createDate: '2024-02-25',
+    },
+]
+
 export const mockBarData = [
     {
         country: 'AD',

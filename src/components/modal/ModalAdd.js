@@ -22,6 +22,9 @@ export default function ModalAdd({ open, setOpen, modalOf = '' }) {
     const [createDate, setCreateDate] = useState('')
     const [expiryDate, setExpiryDate] = useState('')
 
+    //companyManagement
+    const [address, setAddress] = useState('')
+
     const renderInputs = () => {
         switch (modalOf) {
             case 'discount':
@@ -114,6 +117,38 @@ export default function ModalAdd({ open, setOpen, modalOf = '' }) {
                             fullWidth
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
+                        />
+                    </>
+                )
+            case 'companyManagement':
+                return (
+                    <>
+                        <TextField
+                            id='outlined-basic'
+                            label='Tên công ty'
+                            variant='outlined'
+                            color='secondary'
+                            fullWidth
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <TextField
+                            id='outlined-basic'
+                            label='Số điện thoại'
+                            variant='outlined'
+                            color='secondary'
+                            fullWidth
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                        />
+                        <TextField
+                            id='outlined-basic'
+                            label='Địa chỉ'
+                            variant='outlined'
+                            color='secondary'
+                            fullWidth
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
                         />
                     </>
                 )

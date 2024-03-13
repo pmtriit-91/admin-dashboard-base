@@ -18,6 +18,10 @@ import MapOutlinedIcon from '@mui/icons-material/MapOutlined'
 import WorkOutlineOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined'
 import AccessAlarmOutlinedIcon from '@mui/icons-material/AccessAlarmOutlined'
 import DiscountIcon from '@mui/icons-material/Discount'
+import BusinessCenterIcon from '@mui/icons-material/BusinessCenter'
+import HailIcon from '@mui/icons-material/Hail'
+import LocationCityIcon from '@mui/icons-material/LocationCity'
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong'
 import './style.scss'
 
 function SidebarComponent() {
@@ -148,51 +152,58 @@ function SidebarComponent() {
                             color={colors.grey[300]}
                             sx={{ m: '15px 0 5px 20px' }}
                         >
-                            Data
+                            Quản trị
                         </Typography>
-                        <Item
-                            title='Quản lý người sử dụng'
-                            to='/users'
-                            icon={<PeopleOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title='Quản lý nhân viên'
-                            to='/employee'
-                            icon={<ContactsOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
 
+                        <Item
+                            title='Quản lý công ty'
+                            to='/company-management'
+                            icon={<LocationCityIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
+                        <Item
+                            title='Dịch vụ'
+                            to='/workflow-management'
+                            icon={<ReceiptLongIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
                         <Typography
                             variant='h6'
                             color={colors.grey[300]}
                             sx={{ m: '15px 0 5px 20px' }}
                         >
-                            Pages
+                            Doanh nghiệp
                         </Typography>
 
                         <SubMenu
-                            label='Quản lý công việc'
-                            icon={<ReceiptOutlinedIcon />}
+                            label='Quản lý đơn hàng'
+                            icon={<BusinessCenterIcon />}
                         >
                             <Item
-                                title='Công việc'
+                                title='Đơn hàng'
                                 to='/workflow-management'
                                 icon={<WorkOutlineOutlinedIcon />}
                                 selected={selected}
                                 setSelected={setSelected}
                             />
                             <Item
-                                title='Assign work'
-                                to='/assign-work'
+                                title='Quản lý nhân viên'
+                                to='/employee'
                                 icon={<ContactsOutlinedIcon />}
                                 selected={selected}
                                 setSelected={setSelected}
                             />
+                            <Item
+                                title='Quản lý ưu đãi'
+                                to='/discount'
+                                icon={<DiscountIcon />}
+                                selected={selected}
+                                setSelected={setSelected}
+                            />
                             <SubMenu
-                                label='menu lv3'
+                                label='menu lv2'
                                 icon={<AccessAlarmOutlinedIcon />}
                             >
                                 <Item
@@ -205,14 +216,13 @@ function SidebarComponent() {
                             </SubMenu>
                         </SubMenu>
 
-                        <Item
-                            title='Quản lý ưu đãi'
-                            to='/discount'
-                            icon={<DiscountIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-
+                        <Typography
+                            variant='h6'
+                            color={colors.grey[300]}
+                            sx={{ m: '15px 0 5px 20px' }}
+                        >
+                            Thống kê
+                        </Typography>
                         <Item
                             title='Profile Form'
                             to='/form'

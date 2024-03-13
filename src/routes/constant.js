@@ -1,5 +1,6 @@
 export const routerLinks = {
     Dashboard: '/',
+    CompanyManagement: '/company-management',
     Users: '/users',
     Employee: '/employee',
     Workflow: '/workflow-management',
