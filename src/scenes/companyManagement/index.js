@@ -8,12 +8,14 @@ import {
     Popover,
     Tooltip,
     TextField,
-    ListItemText,
-    ListItem,
     List,
-    Avatar,
-    ListItemAvatar,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
     ListItemButton,
+    ListItemAvatar,
+    Checkbox,
+    Avatar,
     Menu,
     MenuItem,
 } from '@mui/material'
@@ -28,6 +30,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd'
 import ModalEdit from '../../components/modal/ModalEdit'
 import ModalAdd from '../../components/modal/ModalAdd'
 import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices'
+import CommentIcon from '@mui/icons-material/Comment'
 
 const CompanyManagement = () => {
     const theme = useTheme()
@@ -41,6 +44,22 @@ const CompanyManagement = () => {
     const [idRowDelete, setIdRowDelete] = useState(null)
     const [anchorEl, setAnchorEl] = useState(null)
     const [anchorElService, setAnchorElService] = useState(null)
+
+    //checked
+    const [checked, setChecked] = React.useState([null])
+
+    const handleToggle = (value) => () => {
+        const currentIndex = checked.indexOf(value)
+        const newChecked = [...checked]
+
+        if (currentIndex === -1) {
+            newChecked.push(value)
+        } else {
+            newChecked.splice(currentIndex, 1)
+        }
+
+        setChecked(newChecked)
+    }
 
     //service
     const handleOpenService = (event) => {
@@ -137,20 +156,21 @@ const CompanyManagement = () => {
                                     {
                                         name: 'offset',
                                         options: {
-                                            offset: [0, -14],
+                                            offset: [0, -5],
                                         },
                                     },
                                 ],
                             },
                         }}
                     >
-                        <IconButton color='success' onClick={handleOpenService}>
+                        <IconButton color='default' onClick={handleOpenService}>
                             <MiscellaneousServicesIcon />
                         </IconButton>
                     </Tooltip>
                     <IconButton
                         onClick={(event) => handleDelete(row.id, event)}
                         aria-label='delete'
+                        color='error'
                     >
                         <DeleteIcon />
                     </IconButton>
@@ -339,105 +359,77 @@ const CompanyManagement = () => {
                         variant='h5'
                         bgcolor={colors.primary[400]}
                         color={colors.grey[100]}
-                        paddingLeft='30px'
-                        paddingTop='20px'
+                        p='10px 20px'
+                        fontWeight='600'
                     >
-                        Thông báo
+                        Danh sách dịch vụ
                     </Typography>
                     <List
                         sx={{
                             width: '100%',
                             maxWidth: 360,
-                            // bgcolor: 'background.paper',
-                            bgcolor: colors.primary[400],
-                            maxHeight: 500,
+                            bgcolor: colors.primary[500],
                         }}
                     >
-                        <ListItemButton>
-                            <ListItem alignItems='flex-start'>
-                                <ListItemAvatar>
-                                    <Avatar
-                                        alt='Remy Sharp'
-                                        src='/static/images/avatar/1.jpg'
-                                    />
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary='Brunch this weekend?'
-                                    secondary={
-                                        <React.Fragment>
-                                            <Typography
-                                                sx={{ display: 'inline' }}
-                                                component='span'
-                                                variant='body2'
-                                                color='text.primary'
-                                            >
-                                                Ali Connors
-                                            </Typography>
-                                            {
-                                                " — I'll be in your neighborhood doing errands this…"
-                                            }
-                                        </React.Fragment>
+                        {[0, 1, 2, 3].map((value) => {
+                            const labelId = `checkbox-list-label-${value}`
+
+                            return (
+                                <ListItem
+                                    key={value}
+                                    secondaryAction={
+                                        <IconButton
+                                            edge='end'
+                                            aria-label='comments'
+                                        >
+                                            <CommentIcon />
+                                        </IconButton>
                                     }
-                                />
-                            </ListItem>
-                        </ListItemButton>
-                        <ListItemButton>
-                            <ListItem alignItems='flex-start'>
-                                <ListItemAvatar>
-                                    <Avatar
-                                        alt='Travis Howard'
-                                        src='/static/images/avatar/2.jpg'
-                                    />
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary='Summer BBQ'
-                                    secondary={
-                                        <React.Fragment>
-                                            <Typography
-                                                sx={{ display: 'inline' }}
-                                                component='span'
-                                                variant='body2'
-                                                color='text.primary'
-                                            >
-                                                to Scott, Alex, Jennifer
-                                            </Typography>
-                                            {
-                                                " — Wish I could come, but I'm out of town this…"
-                                            }
-                                        </React.Fragment>
-                                    }
-                                />
-                            </ListItem>
-                        </ListItemButton>
-                        <ListItemButton>
-                            <ListItem alignItems='flex-start'>
-                                <ListItemAvatar>
-                                    <Avatar
-                                        alt='Cindy Baker'
-                                        src='/static/images/avatar/3.jpg'
-                                    />
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary='Oui Oui'
-                                    secondary={
-                                        <React.Fragment>
-                                            <Typography
-                                                sx={{ display: 'inline' }}
-                                                component='span'
-                                                variant='body2'
-                                                color='text.primary'
-                                            >
-                                                Sandra Adams
-                                            </Typography>
-                                            {
-                                                ' — Do you have Paris recommendations? Have you ever…'
-                                            }
-                                        </React.Fragment>
-                                    }
-                                />
-                            </ListItem>
-                        </ListItemButton>
+                                    disablePadding
+                                >
+                                    <ListItemButton
+                                        role={undefined}
+                                        onClick={handleToggle(value)}
+                                        dense
+                                    >
+                                        <ListItemIcon>
+                                            <Checkbox
+                                                edge='start'
+                                                checked={
+                                                    checked.indexOf(value) !==
+                                                    -1
+                                                }
+                                                tabIndex={-1}
+                                                disableRipple
+                                                inputProps={{
+                                                    'aria-labelledby': labelId,
+                                                }}
+                                                color='secondary'
+                                            />
+                                        </ListItemIcon>
+                                        <ListItemText
+                                            id={labelId}
+                                            primary={`Line item ${value + 1}`}
+                                        />
+                                    </ListItemButton>
+                                </ListItem>
+                            )
+                        })}
                     </List>
+                    <Box
+                        bgcolor={colors.primary[400]}
+                        display='flex'
+                        justifyContent='flex-end'
+                    >
+                        <Button color='secondary'>Chọn</Button>
+                        <Button
+                            sx={{
+                                color: colors.grey[100],
+                            }}
+                        >
+                            Huỷ
+                        </Button>
+                    </Box>
                 </Box>
             </Popover>
         </Box>

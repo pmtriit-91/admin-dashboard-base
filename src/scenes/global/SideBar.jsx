@@ -30,6 +30,8 @@ function SidebarComponent() {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
 
+    const tokenStorage = localStorage.getItem('token')
+
     const Item = ({ title, to, icon, selected, setSelected }) => {
         return (
             <Link to={to} style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -146,75 +148,89 @@ function SidebarComponent() {
                             selected={selected}
                             setSelected={setSelected}
                         />
+                        {tokenStorage === 'admin' ? (
+                            <>
+                                <Typography
+                                    variant='h6'
+                                    color={colors.grey[300]}
+                                    sx={{ m: '15px 0 5px 20px' }}
+                                >
+                                    Quản trị
+                                </Typography>
 
-                        <Typography
-                            variant='h6'
-                            color={colors.grey[300]}
-                            sx={{ m: '15px 0 5px 20px' }}
-                        >
-                            Quản trị
-                        </Typography>
-
-                        <Item
-                            title='Quản lý công ty'
-                            to='/company-management'
-                            icon={<LocationCityIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Item
-                            title='Dịch vụ'
-                            to='/workflow-management'
-                            icon={<ReceiptLongIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        />
-                        <Typography
-                            variant='h6'
-                            color={colors.grey[300]}
-                            sx={{ m: '15px 0 5px 20px' }}
-                        >
-                            Doanh nghiệp
-                        </Typography>
-
-                        <SubMenu
-                            label='Quản lý đơn hàng'
-                            icon={<BusinessCenterIcon />}
-                        >
-                            <Item
-                                title='Đơn hàng'
-                                to='/workflow-management'
-                                icon={<WorkOutlineOutlinedIcon />}
-                                selected={selected}
-                                setSelected={setSelected}
-                            />
-                            <Item
-                                title='Quản lý nhân viên'
-                                to='/employee'
-                                icon={<ContactsOutlinedIcon />}
-                                selected={selected}
-                                setSelected={setSelected}
-                            />
-                            <Item
-                                title='Quản lý ưu đãi'
-                                to='/discount'
-                                icon={<DiscountIcon />}
-                                selected={selected}
-                                setSelected={setSelected}
-                            />
-                            <SubMenu
-                                label='menu lv2'
-                                icon={<AccessAlarmOutlinedIcon />}
-                            >
                                 <Item
-                                    title='submenu lv3'
-                                    to='/submenu'
+                                    title='Quản lý công ty'
+                                    to='/company-management'
+                                    icon={<LocationCityIcon />}
+                                    selected={selected}
+                                    setSelected={setSelected}
+                                />
+                                <Item
+                                    title='Dịch vụ'
+                                    to='/service'
+                                    icon={<ReceiptLongIcon />}
+                                    selected={selected}
+                                    setSelected={setSelected}
+                                />
+                            </>
+                        ) : (
+                            <>
+                                <Typography
+                                    variant='h6'
+                                    color={colors.grey[300]}
+                                    sx={{ m: '15px 0 5px 20px' }}
+                                >
+                                    Doanh nghiệp
+                                </Typography>
+
+                                <SubMenu
+                                    label='Quản lý đơn hàng'
+                                    icon={<BusinessCenterIcon />}
+                                >
+                                    <Item
+                                        title='Đơn hàng mới'
+                                        to='/new-order'
+                                        icon={<WorkOutlineOutlinedIcon />}
+                                        selected={selected}
+                                        setSelected={setSelected}
+                                    />
+                                    <Item
+                                        title='Quản Lý Đơn hàng'
+                                        to='/workflow-management'
+                                        icon={<WorkOutlineOutlinedIcon />}
+                                        selected={selected}
+                                        setSelected={setSelected}
+                                    />
+
+                                    <SubMenu
+                                        label='menu lv2'
+                                        icon={<AccessAlarmOutlinedIcon />}
+                                    >
+                                        <Item
+                                            title='submenu lv3'
+                                            to='/submenu'
+                                            icon={<ContactsOutlinedIcon />}
+                                            selected={selected}
+                                            setSelected={setSelected}
+                                        />
+                                    </SubMenu>
+                                </SubMenu>
+                                <Item
+                                    title='Quản lý nhân viên'
+                                    to='/employee'
                                     icon={<ContactsOutlinedIcon />}
                                     selected={selected}
                                     setSelected={setSelected}
                                 />
-                            </SubMenu>
-                        </SubMenu>
+                                <Item
+                                    title='Quản lý ưu đãi'
+                                    to='/discount'
+                                    icon={<DiscountIcon />}
+                                    selected={selected}
+                                    setSelected={setSelected}
+                                />
+                            </>
+                        )}
 
                         <Typography
                             variant='h6'

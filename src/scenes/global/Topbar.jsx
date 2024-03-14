@@ -54,6 +54,12 @@ function Topbar() {
         setAnchorEl(null)
     }
 
+    //logout
+    const handleLogout = () => {
+        localStorage.removeItem('token')
+        window.location.href = '/login'
+    }
+
     const menuId = 'primary-search-account-menu'
     const renderMenu = (
         <Menu
@@ -71,7 +77,7 @@ function Topbar() {
             open={Boolean(anchoElMenu)}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>
+            <MenuItem onClick={handleLogout}>
                 <IconButton>
                     <LogoutIcon />
                 </IconButton>

@@ -17,10 +17,14 @@ import {
     MenuItem,
     FormControl,
     InputLabel,
+    Card,
+    CardActionArea,
+    CardMedia,
+    CardContent,
 } from '@mui/material'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { tokens } from '../../theme'
-import { mockDataWork, mockDataContacts } from '../../data/mockData'
+import { mockDataOrder, mockDataContacts } from '../../data/mockData'
 import Header from '../../components/Header'
 import EditIcon from '@mui/icons-material/Edit'
 import GroupAddIcon from '@mui/icons-material/GroupAdd'
@@ -29,6 +33,7 @@ import ModalAdd from '../../components/modal/modalWorkflow/ModalAdd'
 import ModalEdit from '../../components/modal/modalWorkflow/ModalEdit'
 import PortraitIcon from '@mui/icons-material/Portrait'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart'
 
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
@@ -48,17 +53,203 @@ const Workflow = () => {
     const [openBoxAsignEmployee, setOpenBoxAsignEmployee] = useState(false)
     const [anchorEl, setAnchorEl] = useState(null)
 
+    //modal details
+    const [detailsAnchorEl, setDetailsAnchorEl] = useState(null)
+
+    const handleOpenDetailsModal = (row, event) => {
+        setDetailsAnchorEl(event.currentTarget)
+    }
+
+    const ModalDetails = () => {
+        return (
+            <Modal
+                open={Boolean(detailsAnchorEl)}
+                onClose={() => setDetailsAnchorEl(false)}
+                aria-labelledby='modal-modal-title'
+                aria-describedby='modal-modal-description'
+                style={{ backdropFilter: 'blur(5px)' }}
+            >
+                <Box
+                    sx={{
+                        borderRadius: '5px',
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: 700,
+                        bgcolor:
+                            theme.palette.mode === 'dark'
+                                ? '#1F2A40'
+                                : '#e0e0e0',
+                        border: '1px solid rgba(0, 0, 0, 0.1) 0px 4px 12px',
+                        boxShadow: 24,
+                        p: 4,
+                        '& .css-1lybvg8-MuiButtonBase-root-MuiButton-root:hover':
+                            {
+                                bgcolor: '#ffffff4d',
+                            },
+                    }}
+                >
+                    <Typography variant='h4' color={colors.grey[100]}>
+                        CHI TIẾT ĐƠN HÀNG
+                    </Typography>
+                    <Box
+                        id='modal-modal-description'
+                        sx={{
+                            mt: 2,
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                '& > :not(style)': { m: 1, width: '70%' },
+                                display: 'flex',
+                                // justifyContent: 'center',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                            }}
+                            noValidate
+                            autoComplete='off'
+                        >
+                            <Box display='flex' alignItems='end' gap='20px'>
+                                <Typography variant='h5' fontWeight='600'>
+                                    Đơn hàng:
+                                </Typography>
+                                <Typography
+                                    color={colors.greenAccent[400]}
+                                    fontWeight='600'
+                                >
+                                    Chăm sóc người già
+                                </Typography>
+                            </Box>
+                            <Box display='flex' alignItems='end' gap='20px'>
+                                <Typography variant='h5' fontWeight='600'>
+                                    Khách hàng:
+                                </Typography>
+                                <Typography
+                                    color={colors.greenAccent[400]}
+                                    fontWeight='600'
+                                >
+                                    Lê Thị Bông Gấm
+                                </Typography>
+                            </Box>
+                            <Box display='flex' alignItems='end' gap='20px'>
+                                <Typography variant='h5' fontWeight='600'>
+                                    Số điện thoại:
+                                </Typography>
+                                <Typography
+                                    color={colors.greenAccent[400]}
+                                    fontWeight='600'
+                                >
+                                    0912.123.458
+                                </Typography>
+                            </Box>
+                            <Box display='flex' alignItems='end' gap='20px'>
+                                <Typography
+                                    flex='1 0 auto'
+                                    variant='h5'
+                                    fontWeight='600'
+                                    alignSelf='flex-start'
+                                >
+                                    Địa chỉ:
+                                </Typography>
+                                <Typography
+                                    color={colors.greenAccent[400]}
+                                    fontWeight='600'
+                                >
+                                    22 Nguyễn Huệ, Phường Phú Hội, Thành Phố Huế
+                                </Typography>
+                            </Box>
+                            <Box display='flex' alignItems='end' gap='20px'>
+                                <Typography
+                                    flex='1 0 auto'
+                                    variant='h5'
+                                    fontWeight='600'
+                                    alignSelf='flex-start'
+                                >
+                                    Lưu ý:
+                                </Typography>
+                                <Typography
+                                    color={colors.greenAccent[400]}
+                                    fontWeight='600'
+                                >
+                                    Mang theo dụng cụ 'xe lu' để ủi quẩn áo, vui
+                                    lòng bật nhạc Rách 5 củ để chủ nhà vui vẻ
+                                </Typography>
+                            </Box>
+                        </Box>
+                        <Box>
+                            <Box display='flex' alignItems='end' gap='20px'>
+                                <Card sx={{ maxWidth: 345 }}>
+                                    <CardActionArea>
+                                        <CardMedia
+                                            component='img'
+                                            height='140'
+                                            image={`${process.env.PUBLIC_URL}/assets/user.jpeg`}
+                                            alt='green iguana'
+                                        />
+                                        <CardContent>
+                                            <Typography
+                                                gutterBottom
+                                                variant='h5'
+                                                component='div'
+                                            >
+                                                Trí Đấm Bóp
+                                            </Typography>
+                                            <Typography
+                                                variant='body2'
+                                                color='text.secondary'
+                                            >
+                                                Lizards are a widespread group
+                                                of squamate reptiles, with over
+                                                6,000 species, ranging across
+                                                all continents except Antarctica
+                                            </Typography>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                            </Box>
+                        </Box>
+                    </Box>
+                </Box>
+            </Modal>
+        )
+    }
+
+    //add ten class cho column
+    const getRowClassName = (params) => {
+        switch (params.row.status) {
+            case 'đã huỷ':
+                return 'cancelled-row' // Đặt lớp CSS cho các hàng đã huỷ
+            case 'chờ giao nhân viên':
+                return 'pending-row' // Đặt lớp CSS cho các hàng chờ giao nhân viên
+            case 'đã hoàn thành':
+                return 'completed-row' // Đặt lớp CSS cho các hàng đã hoàn thành
+            default:
+                return '' // Trả về lớp CSS mặc định nếu không phải các trường hợp trên
+        }
+    }
+
     const columns = [
         { field: 'id', headerName: 'ID' },
         {
             field: 'name',
             headerName: 'Job Name',
+            maxWidth: 300,
             flex: 1,
             cellClassName: 'name-column--cell',
         },
+        // {
+        //     field: 'jobType',
+        //     headerName: 'Job Type',
+        //     flex: 0,
+        // },
         {
             field: 'cost',
-            headerName: 'Cost/1h',
+            headerName: 'Cost',
+            maxWidth: 200,
             flex: 1,
             renderCell: (params) => {
                 return <Typography>${params.row.cost}</Typography>
@@ -67,19 +258,20 @@ const Workflow = () => {
         {
             field: 'date',
             headerName: 'Date',
+            maxWidth: 200,
             flex: 1,
         },
         {
-            field: 'jobType',
-            headerName: 'Job Type',
+            field: 'address',
+            headerName: 'Địa điểm',
             flex: 1,
         },
-
         {
             field: 'status',
             headerName: 'Status',
             flex: 1,
         },
+
         {
             field: 'action',
             headerName: 'Actions',
@@ -115,8 +307,7 @@ const Workflow = () => {
                     <Tooltip title='chi tiết'>
                         <IconButton
                             // onClick={() => handleEdit(row.id)}
-                            onClick={() => handleOpenEdit(row)}
-                            color='secondary'
+                            onClick={(e) => handleOpenDetailsModal(row, e)}
                             aria-label='edit'
                         >
                             <MoreHorizIcon />
@@ -149,13 +340,12 @@ const Workflow = () => {
 
         const handleSubmit = (e) => {
             e.preventDefault()
-            console.log(name)
             setOpenBoxAsignEmployee(false)
         }
 
         return (
             <Popover
-                open={openBoxAsignEmployee}
+                open={Boolean(anchorEl)}
                 anchorEl={anchorEl}
                 onClose={handleCloseBoxAsignEmployee}
                 anchorOrigin={{
@@ -420,22 +610,16 @@ const Workflow = () => {
     }
 
     const handleOpenBoxAsignEmployee = (row, event) => {
-        setOpenBoxAsignEmployee(true)
         setAnchorEl(event.currentTarget)
     }
 
     const handleCloseBoxAsignEmployee = () => {
-        setOpenBoxAsignEmployee(false)
         setAnchorEl(null)
     }
 
     const handleOpenEdit = (row) => {
         setOpenEdit(true)
         setData(row)
-    }
-
-    const handleOpenModalAddUser = () => {
-        setOpenAdd(true)
     }
 
     const handlePageSizeChange = (newPageSize) => {
@@ -457,8 +641,11 @@ const Workflow = () => {
                 justifyContent='space-between'
                 alignItems='center'
             >
-                <Header title='CÔNG VIỆC' subtitle='Trang quản lý công việc' />
-                <Button
+                <Header
+                    title='QUẢN LÝ ĐƠN HÀNG'
+                    subtitle='Trang quản lý đơn hàng'
+                />
+                {/* <Button
                     sx={{
                         backgroundColor: colors.blueAccent[700],
                         color: colors.grey[100],
@@ -469,8 +656,8 @@ const Workflow = () => {
                     onClick={handleOpenModalAddUser}
                 >
                     <AddIcon sx={{ mr: '10px' }} />
-                    ADD NEW JOB
-                </Button>
+                    THÊM
+                </Button> */}
             </Box>
             <Box
                 height='75vh'
@@ -510,13 +697,22 @@ const Workflow = () => {
                 }}
             >
                 <DataGrid
-                    rows={mockDataWork}
+                    rows={mockDataOrder}
                     columns={columns}
                     pageSize={pageSize}
                     rowsPerPageOptions={[5, 10, 20]}
                     pagination
                     components={{ Toolbar: GridToolbar }}
                     onPageSizeChange={handlePageSizeChange}
+                    getRowClassName={getRowClassName}
+                    sx={{
+                        '& .cancelled-row': {
+                            bgcolor: colors.redAccent[700],
+                        },
+                        '& .pending-row': {
+                            bgcolor: 'Highlight',
+                        },
+                    }}
                 />
             </Box>
             <ModalAdd open={openAdd} setOpen={setOpenAdd}></ModalAdd>
@@ -525,6 +721,7 @@ const Workflow = () => {
                 setOpen={setOpenEdit}
                 data={data}
             ></ModalEdit>
+            {ModalDetails()}
         </Box>
     )
 }

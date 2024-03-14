@@ -17,6 +17,8 @@ import LoginLayout from '../layout/loginLayout/LoginLayout'
 import Login from '../scenes/login'
 import Discount from '../scenes/discount'
 import CompanyManagement from '../scenes/companyManagement'
+import Service from '../scenes/service'
+import NewOrder from '../scenes/newOrder'
 
 // import MobileDashboard from "./Mobile/MobileDashboard";
 // import MobileSettings from "./Mobile/MobileSettings";
@@ -50,6 +52,10 @@ import CompanyManagement from '../scenes/companyManagement'
 //   { name: "blank", path: "*", element: Blank },
 // ];
 
+// // const tokenStorage = 'admin'
+// let layout
+// // tokenStorage && tokenStorage === 'admin' ? AdminLayout : BussinessLayout
+
 //Public routes
 const publicRoutes = [
     {
@@ -60,6 +66,11 @@ const publicRoutes = [
     {
         path: routerLinks.CompanyManagement,
         component: CompanyManagement,
+        layout: AdminLayout,
+    },
+    {
+        path: routerLinks.Service,
+        component: Service,
         layout: AdminLayout,
     },
     {
@@ -115,6 +126,11 @@ const publicRoutes = [
     {
         path: routerLinks.Geography,
         component: Geography,
+        layout: AdminLayout,
+    },
+    {
+        path: routerLinks.NewOrder,
+        component: NewOrder,
         layout: AdminLayout,
     },
     {

@@ -1360,13 +1360,14 @@ export const mockGeographyData = [
     },
 ]
 
-export const mockDataWork = [
+export const mockDataOrder = [
     {
         id: 1,
         name: 'Dọn dẹp nhà',
         cost: '21.24',
         date: '03/12/2022',
         jobType: 'Dịch vụ phổ biến',
+        address: '55 Lê Lợi, Quận Tân Bình, Thành phố Vũng Tàu',
         status: 'chờ giao nhân viên',
     },
     {
@@ -1375,6 +1376,7 @@ export const mockDataWork = [
         cost: '45.67',
         date: '23/07/2023',
         jobType: 'Dịch vụ chăm sóc và hỗ trợ',
+        address: '312 Lê Hồng phong, Quận ABC, Thành phố Gia Lai',
         status: 'đang tiến hành',
     },
     {
@@ -1383,6 +1385,7 @@ export const mockDataWork = [
         cost: '80.00',
         date: '18/02/2024',
         jobType: 'Dịch vụ bảo dưỡng điện máy',
+        address: '456 Đường XYZ, Quận ABC, Thành phố Hà Nội',
         status: 'đã hoàn thành',
     },
     {
@@ -1391,7 +1394,8 @@ export const mockDataWork = [
         cost: '130.00',
         date: '29/12/2023',
         jobType: 'Dịch vụ dành cho doanh nghiệp',
-        status: 'đã hoàn thành',
+        address: '789 Đường DEF, Quận MNO, Thành phố Đà Nẵng',
+        status: 'đã huỷ',
     },
     {
         id: 5,
@@ -1399,6 +1403,7 @@ export const mockDataWork = [
         cost: '20.25',
         date: '01/02/2024',
         jobType: 'Dịch vụ  ích nâng cao',
+        address: '177 Đường Điện Biên Phủ, Thành phố Huế',
         status: 'đang tiến hành',
     },
     {
@@ -1407,6 +1412,7 @@ export const mockDataWork = [
         cost: '60.00',
         date: '14/02/2024',
         jobType: 'Dịch vụ phổ biến',
+        address: '321 Đường GHI, Quận PQR, Thành phố Hải Phòng',
         status: 'chờ giao nhân viên',
     },
     {
@@ -1415,6 +1421,7 @@ export const mockDataWork = [
         cost: '30.00',
         date: '04/03/2024',
         jobType: 'Dịch vụ chăm sóc và hỗ trợ',
+        address: 'Đường 23 tháng 8, TP Thành phố HCM',
         status: 'đã hoàn thành',
     },
     {
@@ -1423,6 +1430,7 @@ export const mockDataWork = [
         cost: '90.00',
         date: '08/03/2024',
         jobType: 'Dịch vụ bảo dưỡng điện máy',
-        status: 'đã hoàn thành',
+        address: '123 Đường ABC, Quận XYZ, Thành phố HCM',
+        status: 'đã huỷ',
     },
 ]

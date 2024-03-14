@@ -70,7 +70,7 @@ export default function ModalEdit({ open, setOpen, data = {} }) {
                         component='h2'
                         color={colors.grey[500]}
                     >
-                        EDIT USER
+                        CHỈNH SỬA ĐƠN HÀNG
                     </Typography>
                     <Box id='modal-modal-description' sx={{ mt: 2 }}>
                         Duis mollis, est non commodo luctus, nisi erat porttitor

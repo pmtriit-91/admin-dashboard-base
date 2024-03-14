@@ -20,7 +20,8 @@ if (process.env.NODE_ENV === 'development') {
 
 function App() {
     const [theme, colorMode] = useMode()
-    const tokenStorage = '22'
+    const tokenStorage = localStorage.getItem('token')
+    console.log({ tokenStorage })
 
     return (
         <ColorModeContext.Provider value={colorMode}>
@@ -45,6 +46,9 @@ function App() {
                     <Routes>
                         {publicRoutes.map((route, index) => {
                             let Layout = AdminLayout
+                            // tokenStorage && tokenStorage === 'admin'
+                            //     ? (Layout = AdminLayout)
+                            //     : (Layout = BussinessLayout)
 
                             if (route.layout) {
                                 Layout = route.layout

@@ -176,7 +176,7 @@ function Dashboard() {
                 {/* TRANSACTIONS */}
                 <Box
                     gridColumn='span 4'
-                    gridRow='span 2'
+                    gridRow='span 4'
                     bgcolor={colors.primary[400]}
                     overflow='auto'
                 >
@@ -287,7 +287,7 @@ function Dashboard() {
                 </Box>
 
                 {/*  */}
-                <Box
+                {/* <Box
                     gridColumn='span 4'
                     gridRow='span 2'
                     bgcolor={colors.primary[400]}
@@ -304,7 +304,7 @@ function Dashboard() {
                     <Box height='200px'>
                         <GeographyChart isDashboard={true} />
                     </Box>
-                </Box>
+                </Box> */}
             </Box>
         </Box>
     )
