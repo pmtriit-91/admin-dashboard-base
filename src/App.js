@@ -79,7 +79,6 @@ function App() {
                             let Layout = LoginLayout
 
                             if (route.layout) {
-                                console.log('layout: ', route.component)
                                 Layout = route.layout
                             } else if (route.layout === null) {
                                 Layout = Fragment

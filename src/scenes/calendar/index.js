@@ -78,6 +78,7 @@ const Calendar = () => {
                     backgroundColor={colors.primary[400]}
                     p='15px'
                     borderRadius='4px'
+                    // color={colors.grey[100]}
                 >
                     <Typography variant='h5'>Events</Typography>
                     <List>
@@ -113,7 +114,16 @@ const Calendar = () => {
                 </Box>
 
                 {/* CALENDAR */}
-                <Box flex='1 1 100%' ml='15px'>
+                <Box
+                    flex='1 1 100%'
+                    ml='15px'
+                    sx={{
+                        '& .fc-col-header-cell-cushion, .fc-daygrid-day-number':
+                            {
+                                color: colors.grey[100],
+                            },
+                    }}
+                >
                     <FullCalendar
                         height='75vh'
                         plugins={[
@@ -148,7 +158,6 @@ const Calendar = () => {
                                 date: '2022-09-28',
                             },
                         ]}
-                        // khởi tạo note mặc định ở sidebar của calendar
                     />
                 </Box>
             </Box>

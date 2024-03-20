@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar'
-import { Box, IconButton, Typography, useTheme } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Box, IconButton, Tooltip, Typography, useTheme } from '@mui/material'
+import { Link, useLocation } from 'react-router-dom'
 import { tokens } from '../../theme'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
 import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined'
@@ -22,27 +22,112 @@ import BusinessCenterIcon from '@mui/icons-material/BusinessCenter'
 import HailIcon from '@mui/icons-material/Hail'
 import LocationCityIcon from '@mui/icons-material/LocationCity'
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong'
+import PriceChangeIcon from '@mui/icons-material/PriceChange'
 import './style.scss'
 
 function SidebarComponent() {
     const [isCollapsed, setIsCollapsed] = useState(false)
-    const [selected, setSelected] = useState('Dashboard')
+    const [selected, setSelected] = useState('Trang chủ')
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
-
     const tokenStorage = localStorage.getItem('token')
+    const location = useLocation()
+
+    //active menu
+    useEffect(() => {
+        const path = location.pathname
+        let selectedTitle = 'Trang chủ'
+        switch (path) {
+            case '/company-management':
+                selectedTitle = 'Quản lý công ty'
+                break
+            case '/service':
+                selectedTitle = 'Quản lý dịch vụ'
+                break
+            case '/price-list':
+                selectedTitle = 'Quản lý bảng giá'
+                break
+            case '/new-order':
+                selectedTitle = 'Đơn hàng mới'
+                break
+            case '/workflow-management':
+                selectedTitle = 'Quản Lý Đơn hàng'
+                break
+            case '/submenu':
+                selectedTitle = 'submenu lv3'
+                break
+            case '/employee':
+                selectedTitle = 'Quản lý nhân viên'
+                break
+            case '/discount':
+                selectedTitle = 'Quản lý ưu đãi'
+                break
+            case '/form':
+                selectedTitle = 'Profile Form'
+                break
+            case '/calendar':
+                selectedTitle = 'Calendar'
+                break
+            case '/faq':
+                selectedTitle = 'FAQ Page'
+                break
+            case '/bar':
+                selectedTitle = 'Bar Chart'
+                break
+            case '/pie':
+                selectedTitle = 'Pie Chart'
+                break
+            case '/line':
+                selectedTitle = 'Line Chart'
+                break
+            case '/geography':
+                selectedTitle = 'Geography Chart'
+                break
+            default:
+                selectedTitle = 'Trang chủ'
+        }
+        setSelected(selectedTitle)
+    }, [location])
 
     const Item = ({ title, to, icon, selected, setSelected }) => {
         return (
             <Link to={to} style={{ textDecoration: 'none', color: 'inherit' }}>
-                <MenuItem
-                    active={selected === title}
-                    style={{ color: colors.grey[100] }}
-                    onClick={() => setSelected(title)}
-                    icon={icon}
-                >
-                    <Typography>{title}</Typography>
-                </MenuItem>
+                {isCollapsed ? (
+                    <Tooltip
+                        title={title}
+                        arrow
+                        slotProps={{
+                            popper: {
+                                modifiers: [
+                                    {
+                                        name: 'offset',
+                                        options: {
+                                            offset: [0, -14],
+                                        },
+                                    },
+                                ],
+                            },
+                        }}
+                    >
+                        <MenuItem
+                            active={selected === title}
+                            style={{ color: colors.grey[100] }}
+                            onClick={() => setSelected(title)}
+                            icon={icon}
+                        >
+                            <Typography>{title}</Typography>
+                        </MenuItem>
+                    </Tooltip>
+                ) : (
+                    <MenuItem
+                        active={selected === title}
+                        style={{ color: colors.grey[100] }}
+                        onClick={() => setSelected(title)}
+                        icon={icon}
+                    >
+                        <Typography>{title}</Typography>
+                    </MenuItem>
+                )}
             </Link>
         )
     }
@@ -89,6 +174,7 @@ function SidebarComponent() {
                                 <Typography
                                     variant='h3'
                                     color={colors.grey[100]}
+                                    fontWeight='900'
                                 >
                                     BTASKEE
                                 </Typography>
@@ -166,9 +252,16 @@ function SidebarComponent() {
                                     setSelected={setSelected}
                                 />
                                 <Item
-                                    title='Dịch vụ'
+                                    title='Quản lý dịch vụ'
                                     to='/service'
                                     icon={<ReceiptLongIcon />}
+                                    selected={selected}
+                                    setSelected={setSelected}
+                                />
+                                <Item
+                                    title='Quản lý bảng giá'
+                                    to='/price-list'
+                                    icon={<PriceChangeIcon />}
                                     selected={selected}
                                     setSelected={setSelected}
                                 />
@@ -304,3 +397,43 @@ function SidebarComponent() {
 }
 
 export default SidebarComponent
+
+// import { Link } from 'react-router-dom'
+
+// // case 2:
+// import React, { useState } from 'react'
+// import { Button, Drawer, List, ListItem, ListItemText } from '@mui/material'
+
+// const SidebarComponent = () => {
+//     const [open, setOpen] = useState(true)
+
+//     const toggleDrawer = (isOpen) => () => {
+//         setOpen(isOpen)
+//     }
+
+//     const menuItems = [
+//         { label: 'Home', link: '/' },
+//         { label: 'About', link: '/about' },
+//         { label: 'Services', link: '/services' },
+//         // Add more menu items as needed
+//     ]
+
+//     const renderMenuItems = () => {
+//         return menuItems.map((item) => (
+//             <ListItem button key={item.label} component={Link} to={item.link}>
+//                 <ListItemText primary={item.label} />
+//             </ListItem>
+//         ))
+//     }
+
+//     return (
+//         <div>
+//             <Button onClick={toggleDrawer(true)}>Open sidebar</Button>
+//             <Drawer open={open} onClose={toggleDrawer(false)}>
+//                 <List>{renderMenuItems()}</List>
+//             </Drawer>
+//         </div>
+//     )
+// }
+
+// export default SidebarComponent

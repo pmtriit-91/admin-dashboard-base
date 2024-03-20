@@ -84,11 +84,23 @@ function Dashboard() {
                     subtitle='Chào mừng đến với trang quản lý Btaskee'
                 />
 
-                <Box>
+                <Box
+                    sx={{
+                        '& .css-q34qwa-MuiButtonBase-root-MuiButton-root:hover':
+                            {
+                                bgcolor: colors.primary[400],
+                            },
+                        '& .css-3mc8sk-MuiButtonBase-root-MuiButton-root:hover':
+                            {
+                                bgcolor: 'rgba(4, 5, 9, 0.04)',
+                                color: 'black',
+                            },
+                    }}
+                >
                     <Button
                         sx={{
                             backgroundColor: colors.blueAccent[700],
-                            color: colors.grey[100],
+                            color: 'white',
                             fontSize: '14px',
                             fontWeight: 'bold',
                             padding: '10px 20px',
@@ -107,6 +119,18 @@ function Dashboard() {
                 gridAutoRows='140px'
                 gap='20px'
                 marginTop='30px'
+                sx={{
+                    '& .MuiBox-root.css-1q4qvzg, .MuiBox-root.css-mqmzkw, .MuiBox-root.css-1nue0r4, .MuiBox-root.css-1arw0df, .MuiBox-root.css-q7je8g':
+                        {
+                            // backgroundColor: '#fff',
+                            boxShadow:
+                                'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px',
+                        },
+                    '& .css-59jqr3-MuiSvgIcon-root,.css-1yqlyn3-MuiSvgIcon-root':
+                        {
+                            fontSize: '28px',
+                        },
+                }}
             >
                 {/* ROW 1 */}
                 {dataRow1.map((data, i) => (

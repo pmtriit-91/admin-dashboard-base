@@ -30,6 +30,10 @@ export default function ModalEdit({ open, setOpen, data = {}, modalOf = '' }) {
     //CompanyManagement
     const [service, setService] = useState(data?.service || '')
 
+    //service
+    const [serviceGroup, setServiceGroup] = useState(data?.serviceGroup || '')
+    const [serviceName, setServiceName] = useState(data?.serviceName || '')
+
     useEffect(() => {
         //set state users
         setName(data?.name || '')
@@ -230,6 +234,37 @@ export default function ModalEdit({ open, setOpen, data = {}, modalOf = '' }) {
                             label='Ngày tạo'
                             variant='outlined'
                             color='secondary'
+                            value={createDate}
+                            onChange={(e) => setCreateDate(e.target.value)}
+                        />
+                    </>
+                )
+            case 'service':
+                return (
+                    <>
+                        {/* <TextField
+                            id='outlined-basic'
+                            label='Nhóm dịch vụ'
+                            variant='outlined'
+                            color='secondary'
+                            fullWidth
+                            value={serviceGroup}
+                            onChange={(e) => setServiceGroup(e.target.value)}
+                        /> */}
+                        <TextField
+                            id='outlined-basic'
+                            label='Tên dịch vụ'
+                            variant='outlined'
+                            color='secondary'
+                            value={serviceName}
+                            onChange={(e) => setServiceName(e.target.value)}
+                        />
+                        <TextField
+                            id='outlined-basic'
+                            label='Ngày tạo'
+                            variant='outlined'
+                            color='secondary'
+                            fullWidth
                             value={createDate}
                             onChange={(e) => setCreateDate(e.target.value)}
                         />

@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+
 import {
     Box,
     Typography,
@@ -35,6 +37,8 @@ const NewOrder = () => {
     const [openEdit, setOpenEdit] = useState(false)
     const [openAdd, setOpenAdd] = useState(false)
 
+    const navigate = useNavigate()
+
     const columns = [
         { field: 'id', headerName: 'ID' },
         {
@@ -70,6 +74,7 @@ const NewOrder = () => {
                             color='secondary'
                             aria-label='edit'
                             sx={{ fontSize: '40px' }}
+                            onClick={() => navigate('/workflow-management')}
                         >
                             <VerifiedIcon fontSize='40px' />
                         </IconButton>

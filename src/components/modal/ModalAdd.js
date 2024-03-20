@@ -25,6 +25,10 @@ export default function ModalAdd({ open, setOpen, modalOf = '' }) {
     //companyManagement
     const [address, setAddress] = useState('')
 
+    //service
+    const [serviceGroup, setServiceGroup] = useState('')
+    const [serviceName, setServiceName] = useState('')
+
     const renderInputs = () => {
         switch (modalOf) {
             case 'discount':
@@ -150,6 +154,38 @@ export default function ModalAdd({ open, setOpen, modalOf = '' }) {
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
                         />
+                        {/* <TextField
+                            id='outlined-basic'
+                            label='Nhóm dịch vụ'
+                            variant='outlined'
+                            color='secondary'
+                            fullWidth
+                            value={serviceGroup}
+                            onChange={(e) => setServiceGroup(e.target.value)}
+                        /> */}
+                    </>
+                )
+            case 'service':
+                return (
+                    <>
+                        {/* <TextField
+                            id='outlined-basic'
+                            label='Nhóm dịch vụ'
+                            variant='outlined'
+                            color='secondary'
+                            fullWidth
+                            value={serviceGroup}
+                            onChange={(e) => setServiceGroup(e.target.value)}
+                        /> */}
+                        <TextField
+                            id='outlined-basic'
+                            label='Tên dịch vụ'
+                            variant='outlined'
+                            color='secondary'
+                            fullWidth
+                            value={serviceName}
+                            onChange={(e) => setServiceName(e.target.value)}
+                        />
                     </>
                 )
             default:
@@ -200,13 +236,20 @@ export default function ModalAdd({ open, setOpen, modalOf = '' }) {
                         component='h2'
                         color={colors.grey[500]}
                     >
-                        {modalOf === 'users'
-                            ? 'THÊM NGƯỜI SỬ DỤNG'
-                            : modalOf === 'discount'
-                              ? 'THÊM ƯU ĐÃI'
-                              : modalOf === 'employee'
-                                ? 'THÊM NHÂN VIÊN'
-                                : 'THÊM MỚI'}
+                        {(() => {
+                            switch (modalOf) {
+                                case 'users':
+                                    return 'THÊM NGƯỜI SỬ DỤNG'
+                                case 'discount':
+                                    return 'THÊM ƯU ĐÃI'
+                                case 'employee':
+                                    return 'THÊM NHÂN VIÊN'
+                                case 'service':
+                                    return 'THÊM DỊCH VỤ'
+                                default:
+                                    return 'THÊM MỚI'
+                            }
+                        })()}
                     </Typography>
 
                     <Box id='modal-modal-description' sx={{ mt: 2 }}>

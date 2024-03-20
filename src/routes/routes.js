@@ -19,45 +19,45 @@ import Discount from '../scenes/discount'
 import CompanyManagement from '../scenes/companyManagement'
 import Service from '../scenes/service'
 import NewOrder from '../scenes/newOrder'
+import PriceList from '../scenes/priceList'
 
-// import MobileDashboard from "./Mobile/MobileDashboard";
-// import MobileSettings from "./Mobile/MobileSettings";
+// // import MobileDashboard from "./Mobile/MobileDashboard";
+// // import MobileSettings from "./Mobile/MobileSettings";
 
-// export const routes = [
-//     { name: 'dashboard', path: routerLinks['Dashboard'], element: Dashboard },
-//     { name: 'users', path: routerLinks['Users'], element: Users },
-//     { name: 'employee', path: routerLinks['Employee'], element: Employee },
-//     { name: 'workflow', path: routerLinks['Workflow'], element: Workflow },
-//     { name: 'form', path: routerLinks['Form'], element: Form },
-//     { name: 'calendar', path: routerLinks['Calendar'], element: Calendar },
-//     { name: 'faq', path: routerLinks['Faq'], element: Faq },
-//     { name: 'bar', path: routerLinks['Bar'], element: Bar },
-//     { name: 'pie', path: routerLinks['Pie'], element: Pie },
-//     { name: 'line', path: routerLinks['Line'], element: Line },
-//     { name: 'geography', path: routerLinks['Geography'], element: Geography },
-//     { name: 'blank', path: '*', element: BlankPage },
-// ]
+// // export const routes = [
+// //     { name: 'dashboard', path: routerLinks['Dashboard'], element: Dashboard },
+// //     { name: 'users', path: routerLinks['Users'], element: Users },
+// //     { name: 'employee', path: routerLinks['Employee'], element: Employee },
+// //     { name: 'workflow', path: routerLinks['Workflow'], element: Workflow },
+// //     { name: 'form', path: routerLinks['Form'], element: Form },
+// //     { name: 'calendar', path: routerLinks['Calendar'], element: Calendar },
+// //     { name: 'faq', path: routerLinks['Faq'], element: Faq },
+// //     { name: 'bar', path: routerLinks['Bar'], element: Bar },
+// //     { name: 'pie', path: routerLinks['Pie'], element: Pie },
+// //     { name: 'line', path: routerLinks['Line'], element: Line },
+// //     { name: 'geography', path: routerLinks['Geography'], element: Geography },
+// //     { name: 'blank', path: '*', element: BlankPage },
+// // ]
 
-// export const routesMobile = [
-//   {
-//     name: "overview",
-//     path: m_routerLinks["M_Dashboard"],
-//     element: MobileDashboard,
-//   },
-//   {
-//     name: "settings",
-//     path: m_routerLinks["M_Settings"],
-//     element: MobileSettings,
-//   },
-//   { name: "blank", path: "*", element: Blank },
-// ];
+// // export const routesMobile = [
+// //   {
+// //     name: "overview",
+// //     path: m_routerLinks["M_Dashboard"],
+// //     element: MobileDashboard,
+// //   },
+// //   {
+// //     name: "settings",
+// //     path: m_routerLinks["M_Settings"],
+// //     element: MobileSettings,
+// //   },
+// //   { name: "blank", path: "*", element: Blank },
+// // ];
 
-// // const tokenStorage = 'admin'
-// let layout
-// // tokenStorage && tokenStorage === 'admin' ? AdminLayout : BussinessLayout
+// export { publicRoutes, privateRoutes }
 
-//Public routes
-const publicRoutes = [
+const tokenStorage = localStorage.getItem('token')
+
+let publicRoutes = [
     {
         path: routerLinks.Dashboard,
         component: Dashboard,
@@ -71,6 +71,11 @@ const publicRoutes = [
     {
         path: routerLinks.Service,
         component: Service,
+        layout: AdminLayout,
+    },
+    {
+        path: routerLinks.PriceList,
+        component: PriceList,
         layout: AdminLayout,
     },
     {
@@ -138,9 +143,21 @@ const publicRoutes = [
         component: BlankPage,
         layout: AdminLayout,
     },
-
-    // { path: routesConfig.teethwhite, component: TeethWhite, layout: CategoryLayout },
 ]
+
+// Filter public routes based on token/role
+if (tokenStorage === 'admin') {
+    publicRoutes = publicRoutes.filter(
+        (route) =>
+            ![
+                routerLinks.Workflow,
+                routerLinks.Users,
+                routerLinks.Employee,
+                routerLinks.Discount,
+                routerLinks.NewOrder,
+            ].includes(route.path),
+    )
+}
 
 //Private routes
 const privateRoutes = [
@@ -149,9 +166,6 @@ const privateRoutes = [
         component: Login,
         layout: LoginLayout,
     },
-    // { path: routesConfig.adminSchedule, component: AdminSchedule, layout: AdminLayout },
-    // { path: routesConfig.adminPatientList, component: PatientList, layout: AdminLayout },
-    // { path: routesConfig.adminNews, component: AdminNews, layout: AdminLayout },
 ]
 
 export { publicRoutes, privateRoutes }

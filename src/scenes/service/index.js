@@ -19,7 +19,7 @@ import {
 } from '@mui/material'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { tokens } from '../../theme'
-import { mockCompanyData } from '../../data/mockData'
+import { serviceData } from '../../data/mockData'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import Header from '../../components/Header'
@@ -71,8 +71,14 @@ const Service = () => {
             field: 'id',
             headerName: 'ID',
         },
+        // {
+        //     field: 'serviceGroup',
+        //     headerName: 'Nhóm dịch vụ',
+        //     flex: 1,
+        //     cellClassName: 'group-service-column--cell',
+        // },
         {
-            field: 'name',
+            field: 'serviceName',
             headerName: 'Tên dịch vụ',
             flex: 1,
             cellClassName: 'name-column--cell',
@@ -227,6 +233,9 @@ const Service = () => {
                     '& .name-column--cell': {
                         color: colors.greenAccent[300],
                     },
+                    '& .group-service-column--cell': {
+                        color: colors.redAccent[100],
+                    },
                     '& .MuiDataGrid-columnHeaders': {
                         backgroundColor: colors.blueAccent[700],
                         borderBottom: 'none',
@@ -252,7 +261,7 @@ const Service = () => {
                 }}
             >
                 <DataGrid
-                    rows={mockCompanyData}
+                    rows={serviceData}
                     columns={columns}
                     pageSize={pageSize}
                     rowsPerPageOptions={[5, 10, 20]}
@@ -265,13 +274,9 @@ const Service = () => {
                 open={openEdit}
                 setOpen={setOpenEdit}
                 data={data}
-                modalOf={'companyManagement'}
+                modalOf={'service'}
             />
-            <ModalAdd
-                open={openAdd}
-                setOpen={setOpenAdd}
-                modalOf={'companyManagement'}
-            />
+            <ModalAdd open={openAdd} setOpen={setOpenAdd} modalOf={'service'} />
         </Box>
     )
 }

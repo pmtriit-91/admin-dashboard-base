@@ -34,6 +34,7 @@ import ModalEdit from '../../components/modal/modalWorkflow/ModalEdit'
 import PortraitIcon from '@mui/icons-material/Portrait'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart'
+import DeleteIcon from '@mui/icons-material/Delete'
 
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
@@ -162,6 +163,17 @@ const Workflow = () => {
                                     22 Nguyễn Huệ, Phường Phú Hội, Thành Phố Huế
                                 </Typography>
                             </Box>
+                            {/* <Box display='flex' alignItems='end' gap='20px'>
+                                <Typography variant='h5' fontWeight='600'>
+                                    Thời gian:
+                                </Typography>
+                                <Typography
+                                    color={colors.greenAccent[400]}
+                                    fontWeight='600'
+                                >
+                                    23h-1h
+                                </Typography>
+                            </Box> */}
                             <Box display='flex' alignItems='end' gap='20px'>
                                 <Typography
                                     flex='1 0 auto'
@@ -304,6 +316,11 @@ const Workflow = () => {
                         </IconButton>
                     </Tooltip>
                     <PopoverBoxAsignEmployee />
+                    <Tooltip title='xoá'>
+                        <IconButton color='error'>
+                            <DeleteIcon />
+                        </IconButton>
+                    </Tooltip>
                     <Tooltip title='chi tiết'>
                         <IconButton
                             // onClick={() => handleEdit(row.id)}

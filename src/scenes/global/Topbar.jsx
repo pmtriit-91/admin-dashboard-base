@@ -20,6 +20,7 @@ import {
     Tooltip,
 } from '@mui/material'
 import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ColorModeContext, tokens } from '../../theme'
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined'
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined'
@@ -34,6 +35,7 @@ function Topbar() {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
     const colorMode = useContext(ColorModeContext)
+    const navigate = useNavigate()
 
     const [anchorEl, setAnchorEl] = useState(null)
     const [anchoElMenu, setAnchorElMenu] = useState(null)
@@ -170,7 +172,12 @@ function Topbar() {
                             maxHeight: 500,
                         }}
                     >
-                        <ListItemButton>
+                        <ListItemButton
+                            onClick={() => {
+                                navigate('/workflow-management')
+                                setAnchorEl(false)
+                            }}
+                        >
                             <ListItem alignItems='flex-start'>
                                 <ListItemAvatar>
                                     <Avatar

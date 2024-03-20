@@ -5,6 +5,7 @@ export const routerLinks = {
     Users: '/users',
     Employee: '/employee',
     Workflow: '/workflow-management',
+    PriceList: '/price-list',
     NewOrder: '/new-order',
     Discount: '/discount',
     Form: '/form',

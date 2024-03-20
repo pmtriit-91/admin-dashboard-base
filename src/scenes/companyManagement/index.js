@@ -45,6 +45,19 @@ const CompanyManagement = () => {
     const [anchorEl, setAnchorEl] = useState(null)
     const [anchorElService, setAnchorElService] = useState(null)
 
+    //add ten class cho column
+    const getRowClassName = (params) => {
+        console.log({ params })
+        switch (params.row.status) {
+            case 'Đã thanh toán':
+                return 'paid'
+            case 'Chưa thanh toán':
+                return 'pending-pay'
+            default:
+                return ''
+        }
+    }
+
     //checked
     const [checked, setChecked] = React.useState([null])
 
@@ -109,7 +122,7 @@ const CompanyManagement = () => {
         },
         {
             field: 'service',
-            headerName: 'Dịch vụ',
+            headerName: 'Kiểu Dịch vụ',
             flex: 1,
         },
         {
@@ -125,6 +138,11 @@ const CompanyManagement = () => {
         {
             field: 'createDate',
             headerName: 'Ngày tạo',
+            flex: 1,
+        },
+        {
+            field: 'status',
+            headerName: 'Trạng thái',
             flex: 1,
         },
         {
@@ -328,6 +346,16 @@ const CompanyManagement = () => {
                     pagination
                     components={{ Toolbar: GridToolbar }}
                     onPageSizeChange={handlePageSizeChange}
+                    getRowClassName={getRowClassName}
+                    sx={{
+                        '& .pending-pay': {
+                            background:
+                                'linear-gradient(to right, #fd746c, #ff9068)',
+                            '&:hover': {
+                                bgcolor: colors.redAccent[900],
+                            },
+                        },
+                    }}
                 />
             </Box>
             <ModalEdit
@@ -421,7 +449,9 @@ const CompanyManagement = () => {
                         display='flex'
                         justifyContent='flex-end'
                     >
-                        <Button color='secondary'>Chọn</Button>
+                        <Button color='secondary' onClick={handleCloseService}>
+                            Chọn
+                        </Button>
                         <Button
                             sx={{
                                 color: colors.grey[100],

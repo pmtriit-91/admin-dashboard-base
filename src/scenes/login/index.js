@@ -258,7 +258,7 @@ function Login() {
                             <Form.Item name='loginresult'>
                                 <Button
                                     fullWidth
-                                    type='button' // Change type to 'button' to prevent form submission
+                                    type='submit'
                                     variant='contained'
                                     className='form-btn'
                                     onClick={handleSubmit}

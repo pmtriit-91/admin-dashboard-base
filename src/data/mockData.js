@@ -360,6 +360,7 @@ export const mockCompanyData = [
         phone: '0123456789',
         address: '123 Đường ABC, Quận XYZ, Thành phố HCM',
         createDate: '2024-02-28',
+        status: 'Chưa thanh toán',
     },
     {
         id: 2,
@@ -368,6 +369,7 @@ export const mockCompanyData = [
         phone: '0987654321',
         address: '456 Đường XYZ, Quận ABC, Thành phố Hà Nội',
         createDate: '2024-02-28',
+        status: 'Đã thanh toán',
     },
     {
         id: 3,
@@ -376,6 +378,7 @@ export const mockCompanyData = [
         phone: '0365478912',
         address: '789 Đường DEF, Quận MNO, Thành phố Đà Nẵng',
         createDate: '2024-02-27',
+        status: 'Đã thanh toán',
     },
     {
         id: 4,
@@ -384,6 +387,7 @@ export const mockCompanyData = [
         phone: '0321654987',
         address: '321 Đường GHI, Quận PQR, Thành phố Hải Phòng',
         createDate: '2024-02-26',
+        status: 'Chưa thanh toán',
     },
     {
         id: 5,
@@ -392,6 +396,7 @@ export const mockCompanyData = [
         phone: '0153792648',
         address: '987 Đường JKL, Quận STU, Thành phố Cần Thơ',
         createDate: '2024-02-25',
+        status: 'Đã thanh toán',
     },
 ]
 
@@ -1432,5 +1437,70 @@ export const mockDataOrder = [
         jobType: 'Dịch vụ bảo dưỡng điện máy',
         address: '123 Đường ABC, Quận XYZ, Thành phố HCM',
         status: 'đã huỷ',
+    },
+]
+
+export const pricingData = [
+    {
+        id: 1,
+        package: '1 tháng',
+        price: '1,000,000',
+        discount: 0,
+        createDate: '02/05/2023',
+    },
+    {
+        id: 2,
+        package: '3 tháng',
+        price: '2,700,000',
+        discount: 10,
+        createDate: '16/12/2023',
+    },
+    {
+        id: 3,
+        package: '6 tháng',
+        price: '5,100,000', // Giảm 15% so với giá gói 1 tháng
+        discount: 15, // Khuyến mãi 15%
+        createDate: '01/26/2024',
+    },
+    {
+        id: 4,
+        package: '12 tháng',
+        price: '9,600,000', // Giảm 20% so với giá gói 1 tháng
+        discount: 20, // Khuyến mãi 20%
+        createDate: '03/03/2024',
+    },
+]
+
+export const serviceData = [
+    {
+        id: 1,
+        serviceGroup: 'ABC Cleaning Services',
+        serviceName: 'Dọn nhà',
+        createDate: '2024-02-28',
+    },
+    {
+        id: 2,
+        serviceGroup: 'XYZ Cooking Service',
+        serviceName: 'Nấu ăn',
+        createDate: '2024-02-28',
+    },
+    {
+        id: 3,
+        serviceGroup: 'Senior Care Center',
+        serviceName: 'Chăm người già',
+        createDate: '2024-02-27',
+    },
+    {
+        id: 4,
+        serviceGroup: 'Sunshine Housekeeping',
+        serviceName: 'Dọn nhà',
+        phone: '0321654987',
+        createDate: '2024-02-26',
+    },
+    {
+        id: 5,
+        serviceGroup: 'Healthy Meals Delivery',
+        serviceName: 'Giao đồ ăn lành mạnh',
+        createDate: '2024-02-25',
     },
 ]
