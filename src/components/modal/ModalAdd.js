@@ -6,11 +6,15 @@ import Modal from '@mui/material/Modal'
 import { useTheme } from '@mui/material'
 import { tokens } from '../../theme'
 import TextField from '@mui/material/TextField'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 export default function ModalAdd({ open, setOpen, modalOf = '' }) {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
     const handleClose = () => setOpen(false)
+
+    //media query
+    const matches = useMediaQuery('(min-width:600px)')
 
     //users
     const [name, setName] = useState('')
@@ -215,7 +219,7 @@ export default function ModalAdd({ open, setOpen, modalOf = '' }) {
                         top: '50%',
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
-                        width: 700,
+                        width: matches ? 700 : '90vw',
                         // bgcolor: 'background.paper',
                         bgcolor:
                             theme.palette.mode === 'dark'
@@ -223,7 +227,7 @@ export default function ModalAdd({ open, setOpen, modalOf = '' }) {
                                 : '#e0e0e0',
                         border: '1px solid rgba(0, 0, 0, 0.1) 0px 4px 12px',
                         boxShadow: 24,
-                        p: 4,
+                        p: matches ? 4 : 2,
                         '& .css-1lybvg8-MuiButtonBase-root-MuiButton-root:hover':
                             {
                                 bgcolor: '#ffffff4d',

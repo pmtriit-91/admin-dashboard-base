@@ -31,13 +31,14 @@ import ModalEdit from '../../components/modal/ModalEdit'
 import ModalAdd from '../../components/modal/ModalAdd'
 import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices'
 import CommentIcon from '@mui/icons-material/Comment'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 const CompanyManagement = () => {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
     const [data, setData] = useState(null)
     const [dataUsers, setDataUsers] = useState([])
-    const [pageSize, setPageSize] = useState(10)
+    const [pageSize, setPageSize] = useState(5)
     const [openEdit, setOpenEdit] = useState(false)
     const [openAdd, setOpenAdd] = useState(false)
     const [openDelete, setOpenDelete] = useState(false)
@@ -57,6 +58,9 @@ const CompanyManagement = () => {
                 return ''
         }
     }
+
+    //media query
+    const matches = useMediaQuery('(min-width:900px)')
 
     //checked
     const [checked, setChecked] = React.useState([null])
@@ -113,6 +117,7 @@ const CompanyManagement = () => {
         {
             field: 'id',
             headerName: 'ID',
+            width: 20,
         },
         {
             field: 'name',
@@ -148,7 +153,7 @@ const CompanyManagement = () => {
         {
             field: 'action',
             headerName: 'Hành động',
-            flex: 1,
+            width: 150,
             sortable: false,
             renderCell: ({ row }) => (
                 <Box
@@ -281,7 +286,11 @@ const CompanyManagement = () => {
             <Box
                 display='flex'
                 justifyContent='space-between'
-                alignItems='center'
+                // alignItems='center'
+                sx={{
+                    flexDirection: matches ? 'row' : 'column',
+                    alignItems: matches ? 'center' : 'flex-start',
+                }}
             >
                 <Header
                     title='QUẢN LÝ CÔNG TY'
@@ -294,6 +303,7 @@ const CompanyManagement = () => {
                         fontSize: '14px',
                         fontWeight: 'bold',
                         padding: '10px 20px',
+                        marginTop: 1,
                     }}
                     onClick={handleOpenModalAddUser}
                 >
@@ -302,7 +312,7 @@ const CompanyManagement = () => {
                 </Button>
             </Box>
             <Box
-                height='75vh'
+                height={matches ? '75vh' : '100%'}
                 m='40px 0 0 0'
                 sx={{
                     '& .MuiDataGrid-root': {
@@ -342,19 +352,30 @@ const CompanyManagement = () => {
                     rows={mockCompanyData}
                     columns={columns}
                     pageSize={pageSize}
-                    rowsPerPageOptions={[5, 10, 20]}
+                    initialState={{
+                        ...mockCompanyData.initialState,
+                        pagination: { paginationModel: { pageSize: 5 } },
+                    }}
+                    pageSizeOptions={[5, 10, 25]}
                     pagination
-                    components={{ Toolbar: GridToolbar }}
+                    slots={{ toolbar: GridToolbar }}
                     onPageSizeChange={handlePageSizeChange}
                     getRowClassName={getRowClassName}
                     sx={{
                         '& .pending-pay': {
                             background:
-                                'linear-gradient(to right, #fd746c, #ff9068)',
+                                // 'linear-gradient(to right, #fd746c, #ff9068)',
+                                theme.palette.mode === 'dark'
+                                    ? 'linear-gradient(to right, #200122, #6f0000)'
+                                    : 'linear-gradient(to right, #fd746c, #ff9068)',
                             '&:hover': {
                                 bgcolor: colors.redAccent[900],
                             },
                         },
+                        '& .css-bvbdia-MuiTablePagination-root .MuiTablePagination-input':
+                            {
+                                display: 'flex',
+                            },
                     }}
                 />
             </Box>

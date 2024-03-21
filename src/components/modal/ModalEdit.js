@@ -6,11 +6,15 @@ import Modal from '@mui/material/Modal'
 import { useTheme } from '@mui/material'
 import { tokens } from '../../theme'
 import TextField from '@mui/material/TextField'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 export default function ModalEdit({ open, setOpen, data = {}, modalOf = '' }) {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
     const handleClose = () => setOpen(false)
+
+    //media query
+    const matches = useMediaQuery('(min-width:900px)')
 
     //user
     const [name, setName] = useState(data?.name || '')
@@ -291,7 +295,9 @@ export default function ModalEdit({ open, setOpen, data = {}, modalOf = '' }) {
                         top: '50%',
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
-                        width: 700,
+                        width: matches ? 700 : '90vw',
+                        height: matches ? 'auto' : '75vh',
+                        overflowY: 'auto',
                         // bgcolor: 'background.paper',
                         bgcolor:
                             theme.palette.mode === 'dark'
@@ -304,6 +310,9 @@ export default function ModalEdit({ open, setOpen, data = {}, modalOf = '' }) {
                             {
                                 bgcolor: '#ffffff4d',
                             },
+                        '& .css-10ijh3j>:not(style)': {
+                            width: matches ? 'inherit' : '100% !important',
+                        },
                     }}
                 >
                     <Typography
