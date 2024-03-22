@@ -213,7 +213,7 @@ function Login() {
             <Row justify='center' className='row-form row-login'>
                 <div className='col-form col-login'>
                     <div className='div-form-title'>
-                        <p className='text-2xl font-medium text-center text-gray800 mb-6'>
+                        <p className='text-2xl font-medium text-center text-gray800'>
                             Đăng Nhập
                         </p>
                     </div>

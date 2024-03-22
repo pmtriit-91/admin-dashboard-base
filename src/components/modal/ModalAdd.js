@@ -260,7 +260,7 @@ export default function ModalAdd({ open, setOpen, modalOf = '' }) {
                         <Box
                             component='form'
                             sx={{
-                                '& > :not(style)': { m: 1, width: '70%' },
+                                '& > :not(style)': { m: 1, width: '85%' },
                                 display: 'flex',
                                 justifyContent: 'center',
                                 flexDirection: 'column',
@@ -270,30 +270,34 @@ export default function ModalAdd({ open, setOpen, modalOf = '' }) {
                             autoComplete='off'
                         >
                             {renderInputs()}
-                        </Box>
-                        <Box mt={2} display='flex' justifyContent='flex-end'>
-                            <Button
-                                onClick={handleSave}
-                                variant='contained'
-                                color='success'
-                                sx={{
-                                    marginRight: '10px',
-                                }}
+                            <Box
+                                mt={2}
+                                display='flex'
+                                justifyContent='flex-end'
                             >
-                                Lưu
-                            </Button>
-                            <Button
-                                onClick={handleClose}
-                                variant='outlined'
-                                sx={{
-                                    bgcolor:
-                                        theme.palette.mode === 'dark'
-                                            ? colors.grey[100]
-                                            : '',
-                                }}
-                            >
-                                Huỷ
-                            </Button>
+                                <Button
+                                    onClick={handleSave}
+                                    variant='contained'
+                                    color='success'
+                                    sx={{
+                                        marginRight: '10px',
+                                    }}
+                                >
+                                    Lưu
+                                </Button>
+                                <Button
+                                    onClick={handleClose}
+                                    variant='outlined'
+                                    sx={{
+                                        bgcolor:
+                                            theme.palette.mode === 'dark'
+                                                ? colors.grey[100]
+                                                : '',
+                                    }}
+                                >
+                                    Huỷ
+                                </Button>
+                            </Box>
                         </Box>
                     </Box>
                 </Box>

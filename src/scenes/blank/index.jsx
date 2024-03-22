@@ -48,6 +48,9 @@ const BlankPage = () => {
                 <div className='error__content'>
                     <div className='error__message message'>
                         <h1 className='message__title'>Page Not Found</h1>
+                        <Box className='error__nav e-nav'>
+                            <Link to='/' className='e-nav__link'></Link>
+                        </Box>
                         <p className='message__text'>
                             We're sorry, the page you were looking for isn't
                             found here. The link you followed may either be
@@ -55,9 +58,9 @@ const BlankPage = () => {
                             take a look at our.
                         </p>
                     </div>
-                    <div className='error__nav e-nav'>
+                    {/* <div className='error__nav e-nav'>
                         <Link to='/' className='e-nav__link'></Link>
-                    </div>
+                    </div> */}
                 </div>
                 {/* END Content */}
             </section>

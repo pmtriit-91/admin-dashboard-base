@@ -311,7 +311,7 @@ export default function ModalEdit({ open, setOpen, data = {}, modalOf = '' }) {
                                 bgcolor: '#ffffff4d',
                             },
                         '& .css-10ijh3j>:not(style)': {
-                            width: matches ? 'inherit' : '100% !important',
+                            width: matches ? '85%' : '100% !important',
                         },
                     }}
                 >
@@ -346,8 +346,36 @@ export default function ModalEdit({ open, setOpen, data = {}, modalOf = '' }) {
                             autoComplete='off'
                         >
                             {renderInputs()}
+                            <Box
+                                mt={2}
+                                display='flex'
+                                justifyContent='flex-end'
+                            >
+                                <Button
+                                    onClick={handleSave}
+                                    variant='contained'
+                                    color='success'
+                                    sx={{
+                                        marginRight: '10px',
+                                    }}
+                                >
+                                    Lưu
+                                </Button>
+                                <Button
+                                    onClick={handleClose}
+                                    variant='outlined'
+                                    sx={{
+                                        bgcolor:
+                                            theme.palette.mode === 'dark'
+                                                ? colors.grey[100]
+                                                : '',
+                                    }}
+                                >
+                                    Huỷ
+                                </Button>
+                            </Box>
                         </Box>
-                        <Box mt={2} display='flex' justifyContent='flex-end'>
+                        {/* <Box mt={2} display='flex' justifyContent='flex-end'>
                             <Button
                                 onClick={handleSave}
                                 variant='contained'
@@ -370,7 +398,7 @@ export default function ModalEdit({ open, setOpen, data = {}, modalOf = '' }) {
                             >
                                 Huỷ
                             </Button>
-                        </Box>
+                        </Box> */}
                     </Box>
                 </Box>
             </Modal>
