@@ -4,6 +4,8 @@ export const routerLinks = {
     Service: '/service',
     Users: '/users',
     Employee: '/employee',
+    VerifyEmployee: '/verify-employee',
+    Competence: '/competence-employee',
     Workflow: '/workflow-management',
     PriceList: '/price-list',
     NewOrder: '/new-order',

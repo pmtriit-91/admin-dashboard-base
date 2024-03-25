@@ -1,15 +1,16 @@
 import { useTheme } from '@mui/material'
 import { tokens } from '../theme'
-import { mockPieData as data } from '../data/mockData'
+import { mockPieData as dataFake } from '../data/mockData'
 import { ResponsivePie } from '@nivo/pie'
 
-function PieChart() {
+function PieChart({ data = {} }) {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
+    console.log({ data })
 
     return (
         <ResponsivePie
-            data={data}
+            data={dataFake}
             theme={{
                 axis: {
                     domain: {

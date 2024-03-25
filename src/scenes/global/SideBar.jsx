@@ -23,6 +23,10 @@ import HailIcon from '@mui/icons-material/Hail'
 import LocationCityIcon from '@mui/icons-material/LocationCity'
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong'
 import PriceChangeIcon from '@mui/icons-material/PriceChange'
+import FolderSharedOutlinedIcon from '@mui/icons-material/FolderSharedOutlined'
+import HowToRegOutlinedIcon from '@mui/icons-material/HowToRegOutlined'
+import { routerLinks } from '../../routes/constant'
+import TrendingUpOutlinedIcon from '@mui/icons-material/TrendingUpOutlined'
 import './style.scss'
 
 function SidebarComponent() {
@@ -280,13 +284,13 @@ function SidebarComponent() {
                                     label='Quản lý đơn hàng'
                                     icon={<BusinessCenterIcon />}
                                 >
-                                    <Item
+                                    {/* <Item
                                         title='Đơn hàng mới'
                                         to='/new-order'
                                         icon={<WorkOutlineOutlinedIcon />}
                                         selected={selected}
                                         setSelected={setSelected}
-                                    />
+                                    /> */}
                                     <Item
                                         title='Quản Lý Đơn hàng'
                                         to='/workflow-management'
@@ -308,13 +312,33 @@ function SidebarComponent() {
                                         />
                                     </SubMenu>
                                 </SubMenu>
-                                <Item
-                                    title='Quản lý nhân viên'
-                                    to='/employee'
+                                <SubMenu
+                                    label='Quản lý nhân viên'
                                     icon={<ContactsOutlinedIcon />}
-                                    selected={selected}
-                                    setSelected={setSelected}
-                                />
+                                >
+                                    <Item
+                                        title='Xét duyệt'
+                                        to={routerLinks.VerifyEmployee}
+                                        icon={<HowToRegOutlinedIcon />}
+                                        selected={selected}
+                                        setSelected={setSelected}
+                                    />
+                                    <Item
+                                        title='Nhân viên'
+                                        to={routerLinks.Employee}
+                                        icon={<FolderSharedOutlinedIcon />}
+                                        selected={selected}
+                                        setSelected={setSelected}
+                                    />
+                                    <Item
+                                        title='Năng lực'
+                                        to={routerLinks.Competence}
+                                        icon={<TrendingUpOutlinedIcon />}
+                                        selected={selected}
+                                        setSelected={setSelected}
+                                    />
+                                </SubMenu>
+
                                 <Item
                                     title='Quản lý ưu đãi'
                                     to='/discount'

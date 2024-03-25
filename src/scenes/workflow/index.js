@@ -288,6 +288,7 @@ const Workflow = () => {
             field: 'action',
             headerName: 'Actions',
             flex: 1,
+            minWidth: 200,
             sortable: false,
             renderCell: ({ row }) => (
                 <Box
@@ -717,17 +718,39 @@ const Workflow = () => {
                     rows={mockDataOrder}
                     columns={columns}
                     pageSize={pageSize}
-                    rowsPerPageOptions={[5, 10, 20]}
+                    initialState={{
+                        ...mockDataOrder.initialState,
+                        pagination: { paginationModel: { pageSize: 5 } },
+                    }}
+                    pageSizeOptions={[5, 10, 25]}
                     pagination
-                    components={{ Toolbar: GridToolbar }}
+                    slots={{ toolbar: GridToolbar }}
                     onPageSizeChange={handlePageSizeChange}
                     getRowClassName={getRowClassName}
                     sx={{
                         '& .cancelled-row': {
-                            bgcolor: colors.redAccent[700],
+                            background:
+                                // 'linear-gradient(to right, #fd746c, #ff9068)',
+                                theme.palette.mode === 'dark'
+                                    ? 'linear-gradient(to right, #200122, #6f0000)'
+                                    : 'linear-gradient(to right, #ffc6b9, #feb47b)', //linear-gradient(to right, #ffd5c7, #ffedbc)
+                            '&:hover': {
+                                background:
+                                    theme.palette.mode === 'dark'
+                                        ? 'linear-gradient(to right, #200122, #3b2121)'
+                                        : 'linear-gradient(to right, #ffd5c7, #ffedbc)',
+                            },
                         },
                         '& .pending-row': {
-                            bgcolor: 'Highlight',
+                            // bgcolor: 'Highlight',
+                            background:
+                                // 'linear-gradient(to right, #fd746c, #ff9068)',
+                                theme.palette.mode === 'dark'
+                                    ? 'linear-gradient(to right, #3a7bd5, #3a6073)'
+                                    : 'linear-gradient(to right, #b4f3bb, #a3e0ff)', //'linear-gradient(to right, #b4f3bb, #a3e0ff)'
+                            '&:hover': {
+                                background: 'Highlight',
+                            },
                         },
                     }}
                 />

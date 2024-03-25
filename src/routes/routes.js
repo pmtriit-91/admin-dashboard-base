@@ -20,6 +20,8 @@ import CompanyManagement from '../scenes/companyManagement'
 import Service from '../scenes/service'
 import NewOrder from '../scenes/newOrder'
 import PriceList from '../scenes/priceList'
+import VerifyEmployee from '../scenes/employee/verifyEmployee'
+import Competence from '../scenes/employee/competence'
 
 // // import MobileDashboard from "./Mobile/MobileDashboard";
 // // import MobileSettings from "./Mobile/MobileSettings";
@@ -81,6 +83,16 @@ let publicRoutes = [
     {
         path: routerLinks.Users,
         component: Users,
+        layout: AdminLayout,
+    },
+    {
+        path: routerLinks.VerifyEmployee,
+        component: VerifyEmployee,
+        layout: AdminLayout,
+    },
+    {
+        path: routerLinks.Competence,
+        component: Competence,
         layout: AdminLayout,
     },
     {

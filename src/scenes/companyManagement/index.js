@@ -123,37 +123,49 @@ const CompanyManagement = () => {
             field: 'name',
             headerName: 'Tên công ty',
             flex: 1,
+            minWidth: 200,
             cellClassName: 'name-column--cell',
         },
         {
             field: 'service',
             headerName: 'Kiểu Dịch vụ',
             flex: 1,
+            minWidth: 150,
         },
         {
             field: 'phone',
             headerName: 'Điện thoại',
             flex: 1,
+            minWidth: 100,
         },
         {
             field: 'address',
             headerName: 'Địa chỉ',
             flex: 1,
+            minWidth: 300,
         },
         {
             field: 'createDate',
             headerName: 'Ngày tạo',
             flex: 1,
+            minWidth: 80,
+        },
+        {
+            field: 'package',
+            headerName: 'Gói',
+            width: 50,
         },
         {
             field: 'status',
             headerName: 'Trạng thái',
             flex: 1,
+            minWidth: 100,
         },
         {
             field: 'action',
             headerName: 'Hành động',
-            width: 150,
+            flex: 1,
+            minWidth: 150,
             sortable: false,
             renderCell: ({ row }) => (
                 <Box
@@ -367,7 +379,7 @@ const CompanyManagement = () => {
                                 // 'linear-gradient(to right, #fd746c, #ff9068)',
                                 theme.palette.mode === 'dark'
                                     ? 'linear-gradient(to right, #200122, #6f0000)'
-                                    : 'linear-gradient(to right, #fd746c, #ff9068)',
+                                    : 'linear-gradient(to right, #ed4264, #ffedbc)',
                             '&:hover': {
                                 bgcolor: colors.redAccent[900],
                             },
