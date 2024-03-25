@@ -22,6 +22,7 @@ import NewOrder from '../scenes/newOrder'
 import PriceList from '../scenes/priceList'
 import VerifyEmployee from '../scenes/employee/verifyEmployee'
 import Competence from '../scenes/employee/competence'
+import Blance from '../scenes/employee/blance'
 
 // // import MobileDashboard from "./Mobile/MobileDashboard";
 // // import MobileSettings from "./Mobile/MobileSettings";
@@ -106,6 +107,11 @@ let publicRoutes = [
         layout: AdminLayout,
     },
     {
+        path: routerLinks.Blance,
+        component: Blance,
+        layout: AdminLayout,
+    },
+    {
         path: routerLinks.Discount,
         component: Discount,
         layout: AdminLayout,
@@ -167,6 +173,9 @@ if (tokenStorage === 'admin') {
                 routerLinks.Employee,
                 routerLinks.Discount,
                 routerLinks.NewOrder,
+                routerLinks.Competence,
+                routerLinks.Blance,
+                routerLinks.VerifyEmployee,
             ].includes(route.path),
     )
 }

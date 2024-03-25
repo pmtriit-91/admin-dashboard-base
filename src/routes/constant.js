@@ -6,6 +6,7 @@ export const routerLinks = {
     Employee: '/employee',
     VerifyEmployee: '/verify-employee',
     Competence: '/competence-employee',
+    Blance: '/blance',
     Workflow: '/workflow-management',
     PriceList: '/price-list',
     NewOrder: '/new-order',

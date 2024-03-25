@@ -30,11 +30,11 @@ const Employee = () => {
 
     const columns = [
         { field: 'id', headerName: 'ID', flex: 0.5 },
-        { field: 'registrarId', headerName: 'Registra ID' },
         {
             field: 'name',
             headerName: 'Name',
             flex: 1,
+            minWidth: 200,
             cellClassName: 'name-column--cell',
         },
         {
@@ -43,26 +43,31 @@ const Employee = () => {
             type: 'Number',
             headerAlign: 'left',
             align: 'left',
+            width: 50,
         },
         {
             field: 'phone',
             headerName: 'Phone Number',
             flex: 1,
+            minWidth: 100,
         },
         {
             field: 'address',
             headerName: 'Address',
             flex: 1,
+            minWidth: 300,
         },
         {
             field: 'city',
             headerName: 'City',
             flex: 1,
+            minWidth: 100,
         },
         {
             field: 'status',
             headerName: 'Status',
             flex: 1,
+            minWidth: 100,
             renderCell: ({ row }) => {
                 return (
                     <Box
@@ -106,6 +111,7 @@ const Employee = () => {
             field: 'action',
             headerName: 'Actions',
             flex: 1,
+            minWidth: 100,
             sortable: false,
             renderCell: ({ row }) => (
                 <Box

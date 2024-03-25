@@ -261,7 +261,7 @@ button {
     text-transform: uppercase;
     letter-spacing: 5px;
     font-size: 5.6rem;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
     max-width: 960px;
     margin: 0 auto;
 }
@@ -508,7 +508,7 @@ button {
     }
 
     .error__content {
-        top: 25%;
+        top: 55%;
     }
 
     .message__title {
@@ -524,7 +524,7 @@ button {
     }
 
     .error__content {
-        top: 25%;
+        top: 55%;
     }
 }
 

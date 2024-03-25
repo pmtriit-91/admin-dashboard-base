@@ -40,56 +40,28 @@ function SidebarComponent() {
     //active menu
     useEffect(() => {
         const path = location.pathname
-        let selectedTitle = 'Trang chủ'
-        switch (path) {
-            case '/company-management':
-                selectedTitle = 'Quản lý công ty'
-                break
-            case '/service':
-                selectedTitle = 'Quản lý dịch vụ'
-                break
-            case '/price-list':
-                selectedTitle = 'Quản lý bảng giá'
-                break
-            case '/new-order':
-                selectedTitle = 'Đơn hàng mới'
-                break
-            case '/workflow-management':
-                selectedTitle = 'Quản Lý Đơn hàng'
-                break
-            case '/submenu':
-                selectedTitle = 'submenu lv3'
-                break
-            case '/employee':
-                selectedTitle = 'Quản lý nhân viên'
-                break
-            case '/discount':
-                selectedTitle = 'Quản lý ưu đãi'
-                break
-            case '/form':
-                selectedTitle = 'Profile Form'
-                break
-            case '/calendar':
-                selectedTitle = 'Calendar'
-                break
-            case '/faq':
-                selectedTitle = 'FAQ Page'
-                break
-            case '/bar':
-                selectedTitle = 'Bar Chart'
-                break
-            case '/pie':
-                selectedTitle = 'Pie Chart'
-                break
-            case '/line':
-                selectedTitle = 'Line Chart'
-                break
-            case '/geography':
-                selectedTitle = 'Geography Chart'
-                break
-            default:
-                selectedTitle = 'Trang chủ'
+        const pathToTitle = {
+            [routerLinks.CompanyManagement]: 'Quản lý công ty',
+            [routerLinks.Service]: 'Quản lý dịch vụ',
+            [routerLinks.PriceList]: 'Quản lý bảng giá',
+            [routerLinks.NewOrder]: 'Đơn hàng mới',
+            [routerLinks.Workflow]: 'Quản Lý Đơn hàng',
+            '/submenu': 'submenu lv3',
+            [routerLinks.Employee]: 'Nhân viên',
+            [routerLinks.VerifyEmployee]: 'Xét duyệt',
+            [routerLinks.Competence]: 'Năng lực',
+            [routerLinks.Blance]: 'Nạp rút',
+            [routerLinks.Discount]: 'Quản lý ưu đãi',
+            [routerLinks.Form]: 'Profile Form',
+            [routerLinks.Calendar]: 'Calendar',
+            [routerLinks.Faq]: 'FAQ Page',
+            [routerLinks.Bar]: 'Bar Chart',
+            [routerLinks.Pie]: 'Pie Chart',
+            [routerLinks.Line]: 'Line Chart',
+            [routerLinks.Geography]: 'Geography Chart',
+            default: 'Trang chủ',
         }
+        const selectedTitle = pathToTitle[path] || pathToTitle.default
         setSelected(selectedTitle)
     }, [location])
 
@@ -333,6 +305,13 @@ function SidebarComponent() {
                                     <Item
                                         title='Năng lực'
                                         to={routerLinks.Competence}
+                                        icon={<TrendingUpOutlinedIcon />}
+                                        selected={selected}
+                                        setSelected={setSelected}
+                                    />
+                                    <Item
+                                        title='Nạp rút'
+                                        to={routerLinks.Blance}
                                         icon={<TrendingUpOutlinedIcon />}
                                         selected={selected}
                                         setSelected={setSelected}
