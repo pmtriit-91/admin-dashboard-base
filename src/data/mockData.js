@@ -1508,7 +1508,7 @@ export const serviceData = [
 export const dataCompetence = [
     {
         id: 1,
-        name: 'John Doe',
+        name: 'John Đoé',
         level: 'Senior',
         rating: 4.5,
         completedTask: 80,

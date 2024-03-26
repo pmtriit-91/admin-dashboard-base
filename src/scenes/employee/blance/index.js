@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import {
     Box,
     Typography,
@@ -8,13 +8,14 @@ import {
     Tooltip,
     Modal,
 } from '@mui/material'
-import { DataGrid, GridToolbar } from '@mui/x-data-grid'
+import { DataGrid, GridToolbar, useGridApiContext } from '@mui/x-data-grid'
 import { tokens } from '../../../theme'
 import { dataCompetence } from '../../../data/mockData'
 import Header from '../../../components/Header'
 import { useDispatch } from 'react-redux'
 import PieChartOutlinedIcon from '@mui/icons-material/PieChartOutlined'
 import Pie from '../../pie'
+import CustomNoRowsOverlay from '../../../components/noRows'
 
 const Blance = () => {
     const theme = useTheme()
@@ -25,90 +26,98 @@ const Blance = () => {
     const [openChart, setOpenChart] = useState(false)
     const [dataRow, setDataRow] = useState({})
     const [anchorEl, setAnchorEl] = useState(null)
+    const [loading, setLoading] = useState(true)
 
-    const handleOpenEdit = (row) => {
-        setOpenEdit(true)
-        setData(row)
-    }
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setData(dataCompetence) // [] sẽ hiển thị placeholder
+            setLoading(false)
+        }, 2000)
 
-    const columns = [
-        {
-            field: 'name',
-            headerName: 'Tên nhân viên',
-            cellClassName: 'name-column--cell',
-            flex: 1,
-            minWidth: 300,
-        },
-        {
-            field: 'level',
-            headerName: 'Level',
-            flex: 1,
-            minWidth: 100,
-        },
-        {
-            field: 'rating',
-            headerName: 'Đánh giá',
-            flex: 1,
-            minWidth: 100,
-        },
-        {
-            field: 'completedTask',
-            headerName: 'Đơn thành công',
-            flex: 1,
-            minWidth: 100,
-        },
-        {
-            field: 'failedTask',
-            headerName: 'Đơn thất bại',
-            // headerAlign: 'left',
-            // align: 'left',
-            flex: 1,
-            minWidth: 100,
-        },
-        {
-            field: 'cancelledTask',
-            headerName: 'Đơn huỷ',
-            flex: 1,
-            minWidth: 100,
-        },
-        {
-            field: 'chart',
-            headerName: 'Biểu đồ',
-            flex: 1,
-            renderCell: ({ row }) => (
-                <Box
-                    display='flex'
-                    alignItems='center'
-                    justifyContent='center'
-                    gap={1}
-                >
-                    <Tooltip
-                        title='Mở biểu đồ'
-                        arrow
-                        slotProps={{
-                            popper: {
-                                modifiers: [
-                                    {
-                                        name: 'offset',
-                                        options: {
-                                            offset: [0, -5],
-                                        },
-                                    },
-                                ],
-                            },
-                        }}
+        return () => clearTimeout(timeout)
+    }, [])
+
+    const columns = useMemo(
+        () => [
+            {
+                field: 'name',
+                headerName: 'Tên nhân viên',
+                cellClassName: 'name-column--cell',
+                flex: 1,
+                minWidth: 300,
+            },
+            {
+                field: 'level',
+                headerName: 'Level',
+                flex: 1,
+                minWidth: 100,
+            },
+            {
+                field: 'rating',
+                headerName: 'Đánh giá',
+                flex: 1,
+                minWidth: 100,
+            },
+            {
+                field: 'completedTask',
+                headerName: 'Đơn thành công',
+                flex: 1,
+                minWidth: 100,
+            },
+            {
+                field: 'failedTask',
+                headerName: 'Đơn thất bại',
+                // headerAlign: 'left',
+                // align: 'left',
+                flex: 1,
+                minWidth: 100,
+            },
+            {
+                field: 'cancelledTask',
+                headerName: 'Đơn huỷ',
+                flex: 1,
+                minWidth: 100,
+            },
+            {
+                field: 'chart',
+                headerName: 'Biểu đồ',
+                flex: 1,
+                renderCell: ({ row }) => (
+                    <Box
+                        display='flex'
+                        alignItems='center'
+                        justifyContent='center'
+                        gap={1}
                     >
-                        <IconButton
-                            color='default'
-                            onClick={() => handleOpenChart(row)}
+                        <Tooltip
+                            title='Mở biểu đồ'
+                            arrow
+                            slotProps={{
+                                popper: {
+                                    modifiers: [
+                                        {
+                                            name: 'offset',
+                                            options: {
+                                                offset: [0, -5],
+                                            },
+                                        },
+                                    ],
+                                },
+                            }}
                         >
-                            <PieChartOutlinedIcon />
-                        </IconButton>
-                    </Tooltip>
-                </Box>
-            ),
-        },
-    ]
+                            <IconButton
+                                color='default'
+                                onClick={() => handleOpenChart(row)}
+                            >
+                                <PieChartOutlinedIcon />
+                            </IconButton>
+                        </Tooltip>
+                    </Box>
+                ),
+            },
+        ],
+        [],
+    )
 
     const handleOpenChart = (row) => {
         setDataRow(row)
@@ -152,15 +161,31 @@ const Blance = () => {
                         color: colors.greenAccent[300],
                     },
                     '& .MuiDataGrid-columnHeaders': {
-                        backgroundColor: colors.blueAccent[700],
-                        borderBottom: 'none',
+                        // backgroundColor: colors.blueAccent[700], background: linear-gradient(to right, #4b6cb7, #182848)
+                        background:
+                            theme.palette.mode === 'dark'
+                                ? 'linear-gradient(to right, #2b5876, #4e4376)'
+                                : 'linear-gradient(to right, #b993d6, #8ca6db)',
+                        // borderBottom: '1px solid rgba(224, 224, 224, 1)',
+                    },
+                    '& .css-1essi2g-MuiDataGrid-columnHeaderRow': {
+                        background: 'unset !important',
+                    },
+                    '& .css-jmgi9p::after': {
+                        display: 'none',
                     },
                     '& .MuiDataGrid-virtualScroller': {
                         backgroundColor: colors.primary[400],
                     },
                     '& .MuiDataGrid-footerContainer': {
                         borderTop: 'none',
-                        backgroundColor: colors.blueAccent[700],
+                        // backgroundColor: colors.blueAccent[700],
+                        background:
+                            theme.palette.mode === 'dark'
+                                ? 'linear-gradient(to right, #2b5876, #4e4376)'
+                                : 'linear-gradient(to right, #b993d6, #8ca6db)',
+                        borderBottomLeftRadius: 4,
+                        borderBottomRightRadius: 4,
                     },
                     '& .MuiCheckbox-root': {
                         color: `${colors.greenAccent[200]} !important`,
@@ -168,15 +193,15 @@ const Blance = () => {
                     '& .MuiDataGrid-toolbarContainer .MuiButton-text': {
                         color: `${colors.grey[100]} !important`,
                     },
-                    '& .MuiDataGrid-footerContainer.css-n830jf-MuiDataGrid-footerContainer':
+                    '& .css-1kwdphh-MuiDataGrid-virtualScrollerContent, .css-tgsonj':
                         {
-                            borderBottomLeftRadius: 4,
-                            borderBottomRightRadius: 4,
+                            borderLeft: '1px solid rgba(0, 0, 0, 0.15)',
+                            borderRight: '1px solid rgba(0, 0, 0, 0.15)',
                         },
                 }}
             >
                 <DataGrid
-                    rows={dataCompetence}
+                    rows={data || []}
                     columns={columns}
                     pageSize={pageSize}
                     initialState={{
@@ -184,9 +209,31 @@ const Blance = () => {
                         pagination: { paginationModel: { pageSize: 5 } },
                     }}
                     pageSizeOptions={[5, 10, 25]}
-                    pagination
-                    slots={{ toolbar: GridToolbar }}
                     onPageSizeChange={handlePageSizeChange}
+                    pagination
+                    loading={loading}
+                    slots={{
+                        toolbar: GridToolbar,
+                        noRowsOverlay: CustomNoRowsOverlay, //sau thời gian loading nếu không có dữ liệu thì hiển thị placeholder này
+                    }}
+                    localeText={{
+                        // MuiTablePagination: {
+                        //     labelDisplayedRows: ({ from, to, count }) =>
+                        //         `${from} - ${to} of more than ${count}`,
+                        // },//custom pagination
+
+                        //custom text density (thanh toolbar)
+                        toolbarDensity: 'Size',
+                        toolbarDensityLabel: 'Size',
+                        toolbarDensityCompact: 'Small',
+                        toolbarDensityStandard: 'Medium',
+                        toolbarDensityComfortable: 'Large',
+                    }}
+                    slotProps={{
+                        toolbar: {
+                            showQuickFilter: true,
+                        },
+                    }}
                 />
             </Box>
             <Modal
