@@ -263,6 +263,7 @@ const Workflow = () => {
             headerName: 'Cost',
             maxWidth: 200,
             flex: 1,
+            cellClassName: 'cost-column',
             renderCell: (params) => {
                 return <Typography>${params.row.cost}</Typography>
             },
@@ -690,28 +691,42 @@ const Workflow = () => {
                     '& .name-column--cell': {
                         color: colors.greenAccent[300],
                     },
+                    '& .cost-column': { display: 'flex', alignItems: 'center' },
                     '& .MuiDataGrid-columnHeaders': {
-                        backgroundColor: colors.blueAccent[700],
-                        borderBottom: 'none',
+                        background:
+                            theme.palette.mode === 'dark'
+                                ? 'linear-gradient(to right, #2b5876, #4e4376)'
+                                : 'linear-gradient(to right, #b993d6, #8ca6db)',
+                    },
+                    '& .css-1essi2g-MuiDataGrid-columnHeaderRow': {
+                        background: 'unset !important',
+                    },
+                    '& .css-jmgi9p::after': {
+                        display: 'none',
                     },
                     '& .MuiDataGrid-virtualScroller': {
                         backgroundColor: colors.primary[400],
                     },
                     '& .MuiDataGrid-footerContainer': {
                         borderTop: 'none',
-                        backgroundColor: colors.blueAccent[700],
+                        background:
+                            theme.palette.mode === 'dark'
+                                ? 'linear-gradient(to right, #2b5876, #4e4376)'
+                                : 'linear-gradient(to right, #b993d6, #8ca6db)',
+                        borderBottomLeftRadius: 4,
+                        borderBottomRightRadius: 4,
                     },
                     '& .MuiCheckbox-root': {
                         color: `${colors.greenAccent[200]} !important`,
                     },
-                    '& .MuiDataGrid-footerContainer.css-n830jf-MuiDataGrid-footerContainer':
-                        {
-                            borderBottomLeftRadius: 4,
-                            borderBottomRightRadius: 4,
-                        },
                     '& .MuiDataGrid-toolbarContainer .MuiButton-text': {
                         color: `${colors.grey[100]} !important`,
                     },
+                    '& .css-1kwdphh-MuiDataGrid-virtualScrollerContent, .css-tgsonj':
+                        {
+                            borderLeft: '1px solid rgba(0, 0, 0, 0.15)',
+                            borderRight: '1px solid rgba(0, 0, 0, 0.15)',
+                        },
                 }}
             >
                 <DataGrid
@@ -725,31 +740,36 @@ const Workflow = () => {
                     pageSizeOptions={[5, 10, 25]}
                     pagination
                     slots={{ toolbar: GridToolbar }}
+                    slotProps={{
+                        toolbar: {
+                            showQuickFilter: true,
+                        },
+                    }}
                     onPageSizeChange={handlePageSizeChange}
                     getRowClassName={getRowClassName}
                     sx={{
                         '& .cancelled-row': {
                             background:
-                                // 'linear-gradient(to right, #fd746c, #ff9068)',
                                 theme.palette.mode === 'dark'
                                     ? 'linear-gradient(to right, #200122, #6f0000)'
-                                    : 'linear-gradient(to right, #ffc6b9, #feb47b)', //linear-gradient(to right, #ffd5c7, #ffedbc)
+                                    : 'linear-gradient(to right, #ffc6b9, #feb47b)',
                             '&:hover': {
                                 background:
                                     theme.palette.mode === 'dark'
-                                        ? 'linear-gradient(to right, #200122, #3b2121)'
+                                        ? 'linear-gradient(to right, #641325, #960808)'
                                         : 'linear-gradient(to right, #ffd5c7, #ffedbc)',
                             },
                         },
                         '& .pending-row': {
-                            // bgcolor: 'Highlight',
                             background:
-                                // 'linear-gradient(to right, #fd746c, #ff9068)',
                                 theme.palette.mode === 'dark'
-                                    ? 'linear-gradient(to right, #3a7bd5, #3a6073)'
-                                    : 'linear-gradient(to right, #b4f3bb, #a3e0ff)', //'linear-gradient(to right, #b4f3bb, #a3e0ff)'
+                                    ? 'linear-gradient(to right, #172e1d, #19413a)'
+                                    : 'linear-gradient(to right, #b4f3bb, #a3e0ff)',
                             '&:hover': {
-                                background: 'Highlight',
+                                background:
+                                    theme.palette.mode === 'dark'
+                                        ? 'linear-gradient(to right, #275433, #194d44)'
+                                        : 'linear-gradient(to right, #d7fddc, #d1efff)',
                             },
                         },
                     }}

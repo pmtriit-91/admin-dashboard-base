@@ -120,11 +120,12 @@ function Dashboard() {
                 gap='20px'
                 marginTop='30px'
                 sx={{
-                    '& .MuiBox-root.css-1q4qvzg, .MuiBox-root.css-mqmzkw, .MuiBox-root.css-1nue0r4, .MuiBox-root.css-1arw0df, .MuiBox-root.css-q7je8g':
+                    '& .css-1wo04ma, .css-1vl72ks, .css-fxrul4, .css-3zn8qu, .css-1w5x3pn':
                         {
-                            // backgroundColor: '#fff',
+                            // backgroundColor: '#fff', rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px
                             boxShadow:
-                                'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px',
+                                // 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px',
+                                'rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px',
                         },
                     '& .css-59jqr3-MuiSvgIcon-root,.css-1yqlyn3-MuiSvgIcon-root':
                         {

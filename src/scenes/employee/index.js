@@ -68,6 +68,7 @@ const Employee = () => {
             headerName: 'Status',
             flex: 1,
             minWidth: 100,
+            cellClassName: 'status-column',
             renderCell: ({ row }) => {
                 return (
                     <Box
@@ -86,9 +87,10 @@ const Employee = () => {
                                 padding='5px'
                                 width='50%'
                                 bgcolor='green'
-                                color='#e0e0e0'
                             >
-                                {row.status}
+                                <Typography color='white'>
+                                    {row.status}
+                                </Typography>
                             </Box>
                         ) : (
                             <Box
@@ -98,9 +100,10 @@ const Employee = () => {
                                 padding='5px'
                                 width='50%'
                                 bgcolor='red'
-                                color='#e0e0e0'
                             >
-                                {row.status}
+                                <Typography color='white'>
+                                    {row.status}
+                                </Typography>
                             </Box>
                         )}
                     </Box>
@@ -113,6 +116,7 @@ const Employee = () => {
             flex: 1,
             minWidth: 100,
             sortable: false,
+            cellClassName: 'action-column',
             renderCell: ({ row }) => (
                 <Box
                     display='flex'
@@ -251,11 +255,22 @@ const Employee = () => {
                 <Header title='NHÂN VIÊN' subtitle='Trang quản lý nhân viên' />
                 <Button
                     sx={{
-                        backgroundColor: colors.blueAccent[700],
-                        color: colors.grey[100],
+                        // backgroundColor: colors.blueAccent[700],
+                        background:
+                            theme.palette.mode === 'dark'
+                                ? 'linear-gradient(to right, #2b5876, #4e4376)'
+                                : 'linear-gradient(to right, #b993d6, #8ca6db)',
+                        // color: colors.grey[100],
+                        color: 'white',
                         fontSize: '14px',
                         fontWeight: 'bold',
                         padding: '10px 20px',
+                        '&:hover': {
+                            background:
+                                theme.palette.mode === 'dark'
+                                    ? 'linear-gradient(to right, #346382, #5b5083)'
+                                    : 'linear-gradient(to right, #c8b7d5, #a6beee)',
+                        },
                     }}
                     onClick={handleOpenModalAddMember}
                 >
@@ -276,16 +291,31 @@ const Employee = () => {
                     '& .name-column--cell': {
                         color: colors.greenAccent[300],
                     },
+                    '& .cost-column': { display: 'flex', alignItems: 'center' },
+                    '& .status-column, .action-column': { display: 'flex' },
                     '& .MuiDataGrid-columnHeaders': {
-                        backgroundColor: colors.blueAccent[700],
-                        borderBottom: 'none',
+                        background:
+                            theme.palette.mode === 'dark'
+                                ? 'linear-gradient(to right, #2b5876, #4e4376)'
+                                : 'linear-gradient(to right, #b993d6, #8ca6db)',
+                    },
+                    '& .css-1essi2g-MuiDataGrid-columnHeaderRow': {
+                        background: 'unset !important',
+                    },
+                    '& .css-jmgi9p::after': {
+                        display: 'none',
                     },
                     '& .MuiDataGrid-virtualScroller': {
                         backgroundColor: colors.primary[400],
                     },
                     '& .MuiDataGrid-footerContainer': {
                         borderTop: 'none',
-                        backgroundColor: colors.blueAccent[700],
+                        background:
+                            theme.palette.mode === 'dark'
+                                ? 'linear-gradient(to right, #2b5876, #4e4376)'
+                                : 'linear-gradient(to right, #b993d6, #8ca6db)',
+                        borderBottomLeftRadius: 4,
+                        borderBottomRightRadius: 4,
                     },
                     '& .MuiCheckbox-root': {
                         color: `${colors.greenAccent[200]} !important`,
@@ -293,10 +323,10 @@ const Employee = () => {
                     '& .MuiDataGrid-toolbarContainer .MuiButton-text': {
                         color: `${colors.grey[100]} !important`,
                     },
-                    '& .MuiDataGrid-footerContainer.css-n830jf-MuiDataGrid-footerContainer':
+                    '& .css-1kwdphh-MuiDataGrid-virtualScrollerContent, .css-tgsonj':
                         {
-                            borderBottomLeftRadius: 4,
-                            borderBottomRightRadius: 4,
+                            borderLeft: '1px solid rgba(0, 0, 0, 0.15)',
+                            borderRight: '1px solid rgba(0, 0, 0, 0.15)',
                         },
                 }}
             >

@@ -110,20 +110,10 @@ const VerifyEmployee = () => {
                 justifyContent='space-between'
                 alignItems='center'
             >
-                <Header title='BẢNG GIÁ' subtitle='Trang quản lý bảng giá' />
-                <Button
-                    sx={{
-                        backgroundColor: colors.blueAccent[700],
-                        color: colors.grey[100],
-                        fontSize: '14px',
-                        fontWeight: 'bold',
-                        padding: '10px 20px',
-                    }}
-                    onClick={handleOpenAddPrice}
-                >
-                    <GroupAddIcon sx={{ mr: '10px' }} />
-                    THÊM ƯU ĐÃI
-                </Button>
+                <Header
+                    title='XÉT DUYỆT NGƯỜI LAO ĐỘNG'
+                    subtitle='Trang xét duyệt người lao động'
+                />
             </Box>
             <Box
                 height='75vh'
@@ -138,16 +128,31 @@ const VerifyEmployee = () => {
                     '& .name-column--cell': {
                         color: colors.greenAccent[300],
                     },
+                    '& .cost-column': { display: 'flex', alignItems: 'center' },
+                    '& .status-column, .action-column': { display: 'flex' },
                     '& .MuiDataGrid-columnHeaders': {
-                        backgroundColor: colors.blueAccent[700],
-                        borderBottom: 'none',
+                        background:
+                            theme.palette.mode === 'dark'
+                                ? 'linear-gradient(to right, #2b5876, #4e4376)'
+                                : 'linear-gradient(to right, #b993d6, #8ca6db)',
+                    },
+                    '& .css-1essi2g-MuiDataGrid-columnHeaderRow': {
+                        background: 'unset !important',
+                    },
+                    '& .css-jmgi9p::after': {
+                        display: 'none',
                     },
                     '& .MuiDataGrid-virtualScroller': {
                         backgroundColor: colors.primary[400],
                     },
                     '& .MuiDataGrid-footerContainer': {
                         borderTop: 'none',
-                        backgroundColor: colors.blueAccent[700],
+                        background:
+                            theme.palette.mode === 'dark'
+                                ? 'linear-gradient(to right, #2b5876, #4e4376)'
+                                : 'linear-gradient(to right, #b993d6, #8ca6db)',
+                        borderBottomLeftRadius: 4,
+                        borderBottomRightRadius: 4,
                     },
                     '& .MuiCheckbox-root': {
                         color: `${colors.greenAccent[200]} !important`,
@@ -155,10 +160,10 @@ const VerifyEmployee = () => {
                     '& .MuiDataGrid-toolbarContainer .MuiButton-text': {
                         color: `${colors.grey[100]} !important`,
                     },
-                    '& .MuiDataGrid-footerContainer.css-n830jf-MuiDataGrid-footerContainer':
+                    '& .css-1kwdphh-MuiDataGrid-virtualScrollerContent, .css-tgsonj':
                         {
-                            borderBottomLeftRadius: 4,
-                            borderBottomRightRadius: 4,
+                            borderLeft: '1px solid rgba(0, 0, 0, 0.15)',
+                            borderRight: '1px solid rgba(0, 0, 0, 0.15)',
                         },
                 }}
             >
